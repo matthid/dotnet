@@ -3,8 +3,8 @@
 # $Header: /var/cvsroot/gentoo-x86/eclass/go-mono.eclass,v 1.14 2012/05/02 18:31:42 jdhore Exp $
 
 # @ECLASS: go-mono.eclass
-# @MAINTAINER:
-# dotnet@gentoo.org
+# @MAINTAINERS:
+# heather@cynede.net, dotnet@gentoo.org
 # @BLURB: Common functionality for go-mono.org apps
 # @DESCRIPTION:
 # Common functionality needed by all go-mono.org apps.
