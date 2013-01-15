@@ -1,7 +1,9 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
-EAPI="4"
+
+EAPI="5"
+
 inherit mono eutils multilib git-2
 
 DESCRIPTION="A hybrid programming language for .NET / Mono platforms"

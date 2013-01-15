@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=4
+EAPI=5
 
 EGIT_REPO_URI="https://git01.codeplex.com/nuget"
 
@@ -33,8 +33,6 @@ src_install() {
 
 pkg_postinst() {
 	mozroots --import --sync --machine
-	#mkdir /usr/share/.mono
-	#cp -rf ~/.config/.mono/certs /usr/share/.mono/certs
 	echo "mono /usr/lib/mono/4.0/NuGet.exe \"\$@\"" > /usr/bin/nuget
 	chmod 777 /usr/bin/nuget
 }

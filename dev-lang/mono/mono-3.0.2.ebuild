@@ -1,8 +1,8 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-lang/mono/mono-3.0.1.ebuild $
 
-EAPI="4"
+EAPI="5"
 
 inherit linux-info mono eutils flag-o-matic multilib go-mono pax-utils
 
