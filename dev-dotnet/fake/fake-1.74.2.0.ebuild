@@ -11,7 +11,7 @@ SRC_URI=""
 
 LICENSE="MS-PL"
 SLOT="0"
-KEYWORDS="~amd46 ~x86"
+KEYWORDS="amd46 x86"
 IUSE=""
 
 DEPEND="dev-lang/mono
