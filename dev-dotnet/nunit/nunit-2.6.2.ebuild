@@ -11,7 +11,7 @@ SRC_URI=""
 
 LICENSE="NUnit-License"
 SLOT="0"
-KEYWORDS="~amd46 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="dev-lang/mono"
@@ -21,10 +21,10 @@ src_install() {
 	elog "Installing libraries"
 	insinto /usr/lib/mono/4.0/
 	if [[ $PV == *_alpha* ]]
-	then 
-		NPV=${PV/_/-} 
+	then
+		NPV=${PV/_/-}
 	else
-    	NPV=${PV}
+		NPV=${PV}
 	fi
 	doins NUnit."${NPV}"/lib/nunit.framework.dll || die
 }
