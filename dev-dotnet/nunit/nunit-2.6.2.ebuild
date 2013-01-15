@@ -9,7 +9,6 @@ DESCRIPTION="unit-testing framework for all .Net languages"
 HOMEPAGE="http://nunit.org"
 SRC_URI=""
 
-#TODO: Add it : http://nunit.org/nuget/license.html
 LICENSE="NUnit-License"
 SLOT="0"
 KEYWORDS="~amd46 ~x86"
