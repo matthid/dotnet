@@ -32,7 +32,9 @@ src_install() {
 }
 
 pkg_postinst() {
-	mozroots --import --sync
+	mozroots --import --sync --machine
+	#mkdir /usr/share/.mono
+	#cp -rf ~/.config/.mono/certs /usr/share/.mono/certs
 	echo "mono /usr/lib/mono/4.0/NuGet.exe \"\$\@\"" > /usr/bin/nuget
 	chmod 777 /usr/bin/nuget
 }
