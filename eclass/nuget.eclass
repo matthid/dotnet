@@ -9,19 +9,23 @@
 
 inherit mono
 
-# @FUNCTION: fake_src_configure
+# @FUNCTION: nuget_src_unpack
+# @DESCRIPTION: Runs nuget.
+nuget_src_unpack() { 
+	mkdir "${P}"
+	nuget install "${PN} -Version ${PV}" 
+}
+
+# @FUNCTION: nuget_src_configure
 # @DESCRIPTION: Runs nothing.
 nuget_src_configure() { :; }
 
-# @FUNCTION: fake_src_compile
+# @FUNCTION: nuget_src_compile
 # @DESCRIPTION: Runs nothing.
 nuget_src_compile() { :; }
 
-# @FUNCTION: fake_src_install
-# @DESCRIPTION: installs common doc files, if DOCS is
-# set, installs those. Gets rid of .la files.
-nuget_src_install () {
-	nuget install "${PN} -Version ${PV}"
-}
+# @FUNCTION: nuget_src_install
+# @DESCRIPTION: Runs nothing.
+nuget_src_install () { :; }
 
-EXPORT_FUNCTIONS src_configure src_compile src_install
+EXPORT_FUNCTIONS src_unpack src_configure src_compile src_install
