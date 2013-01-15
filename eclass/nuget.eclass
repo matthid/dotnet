@@ -12,8 +12,7 @@ inherit mono
 # @FUNCTION: nuget_src_unpack
 # @DESCRIPTION: Runs nuget.
 nuget_src_unpack() { 
-	#mkdir "${P}"
-	nuget install "${PN} -Version ${PV}"
+	nuget install "${PN}" -Version "${PV}" -OutputDirectory "${P}"
 }
 
 # @FUNCTION: nuget_src_configure
