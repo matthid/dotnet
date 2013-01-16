@@ -14,8 +14,8 @@ SRC_URI=""
 EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
 
 LICENSE="BSD"
-SLOT="0"
-KEYWORDS=""
+SLOT="4.5"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND=">dev-lang/mono-2.11.3"
@@ -25,13 +25,13 @@ src_configure() { :; }
 
 src_compile() {
 	elog "Nemerle sources compiling : "
-	xbuild NemerleAll-Mono.nproj /t:Stage1 /p:Configuration=Release
+	xbuild NemerleAll-Mono.nproj /t:Stage1 /p:Configuration=Release /tv:4.0 /p:TargetFrameworkVersion=v"${SLOT}"
 }
 
 src_install()
 {
 	elog "Installing libraries"
-	insinto "/usr/$(get_libdir)/mono/${PN}"
+	insinto "/usr/$(get_libdir)/mono/${SLOT}/${PN}"
 	doins bin/Release/mono-3.5/Stage1/*.dll || die "installing libraries failed"
 	elog "Registering libraries to egac"
 	local nemerledll=bin/Release/mono-3.5/Stage1/Nemerle.dll
@@ -50,6 +50,6 @@ src_install()
 }
 
 pkg_postinst() {
-	echo "mono /usr/$(get_libdir)/mono/${PN}/ncc.exe \"\$@\"" > /usr/bin/ncc
-	chmod 666 /usr/bin/ncc
+	echo "mono /usr/$(get_libdir)/mono/${PN}/${SLOT}/ncc.exe \"\$@\"" > /usr/bin/ncc
+	chmod 777 /usr/bin/ncc
 }
