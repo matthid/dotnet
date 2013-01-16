@@ -13,7 +13,7 @@ LICENSE="MIT LGPL-2.1 GPL-2 BSD-4 NPL-1.1 Ms-PL GPL-2-with-linking-exception IDP
 SLOT="0"
 KEYWORDS="~amd64 ~x86 ~amd64-linux ~ppc"
 
-IUSE="minimal pax_kernel xen"
+IUSE="minimal pax_kernel xen doc"
 
 #Bash requirement is for += operator
 COMMONDEPEND="!dev-util/monodoc
@@ -94,7 +94,8 @@ src_configure() {
 		--with-jit \
 		--disable-dtrace \
 		--with-profile4 \
-		$(use_with ppc sgen=no)
+		--with-sgen=$(use ppc && printf "no" || printf "yes" ) \
+		$(use_with doc mcs-docs)
 }
 
 src_test() {
