@@ -15,7 +15,6 @@ KEYWORDS="~amd64 ~x86 ~amd64-linux ~ppc"
 
 IUSE="minimal pax_kernel xen doc"
 
-#Bash requirement is for += operator
 COMMONDEPEND="!dev-util/monodoc
 	!minimal? ( >=dev-dotnet/libgdiplus-2.10 )
 	ia64? (	sys-libs/libunwind )"
@@ -25,7 +24,6 @@ RDEPEND="${COMMONDEPEND}
 DEPEND="${COMMONDEPEND}
 	sys-devel/bc
 	virtual/yacc
-	>=app-shells/bash-3.2
 	pax_kernel? ( sys-apps/paxctl )"
 
 RESTRICT="test"
