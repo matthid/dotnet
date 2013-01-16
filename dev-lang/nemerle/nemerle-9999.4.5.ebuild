@@ -14,7 +14,7 @@ SRC_URI=""
 EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
 
 LICENSE="BSD"
-FRAMEWORK=get_after_major_version
+FRAMEWORK="$(get_after_major_version)"
 SLOT="${FRAMEWORK}"
 KEYWORDS=""
 IUSE=""
