@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/mono/mono-3.0.1.ebuild $
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/mono/mono-3.0.3.ebuild $
 
 EAPI="5"
 
@@ -27,9 +27,6 @@ DEPEND="${COMMONDEPEND}
 	virtual/yacc
 	>=app-shells/bash-3.2
 	pax_kernel? ( sys-apps/paxctl )"
-
-# -j1
-MAKEOPTS="${MAKEOPTS}"
 
 RESTRICT="test"
 
@@ -60,7 +57,6 @@ pkg_setup() {
 
 src_prepare() {
 	go-mono_src_prepare
-
 	# we need to sed in the paxctl -mr in the runtime/mono-wrapper.in so it don't
 	# get killed in the build proces when MPROTEC is enable. #286280
 	# RANDMMAP kill the build proces to #347365
@@ -87,9 +83,6 @@ src_configure() {
 	# and, otherwise, problems like bug #340641 appear.
 	#
 	# sgen fails on ppc, bug #359515
-
-	local myconf=""
-	use ppc && myconf="${myconf} --with-sgen=no"
 	go-mono_src_configure \
 		--enable-system-aot=yes \
 		--enable-static \
@@ -101,7 +94,7 @@ src_configure() {
 		--with-jit \
 		--disable-dtrace \
 		--with-profile4 \
-		${myconf}
+		$(use_with ppc sgen=no)
 }
 
 src_test() {

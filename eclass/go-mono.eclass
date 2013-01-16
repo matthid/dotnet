@@ -1,4 +1,4 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/eclass/go-mono.eclass,v 1.14 2012/05/02 18:31:42 jdhore Exp $
 
@@ -47,13 +47,11 @@ else
 	SRC_URI="http://download.mono-project.com/sources/${PN}/${P}.tar.bz2"
 fi
 
-
 NO_MONO_DEPEND=( "dev-lang/mono" "dev-dotnet/libgdiplus" "dev-dotnet/gluezilla" )
 
 if [[ "$(get_version_component_range 3)" != "9999" ]]
 then
 	GO_MONO_REL_PV="$(get_version_component_range 1-2)"
-
 else
 	GO_MONO_REL_PV="${PV}"
 fi
@@ -98,7 +96,7 @@ go-mono_src_prepare() {
 # @DESCRIPTION:
 # Runs econf, disabling static libraries and dependency-tracking.
 go-mono_src_configure() {
-	econf	--disable-dependency-tracking		\
+	econf --disable-dependency-tracking		\
 		--disable-static			\
 		"$@"
 }
