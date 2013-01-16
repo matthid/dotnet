@@ -32,21 +32,21 @@ src_install()
 {
 	elog "Installing libraries"
 	insinto "/usr/$(get_libdir)/mono/${SLOT}/${PN}"
-	doins bin/Release/mono-3.5/Stage1/*.dll || die "installing libraries failed"
+	doins bin/Release/mono-"${SLOT}"/Stage1/*.dll || die "installing libraries failed"
 	elog "Registering libraries to egac"
-	local nemerledll=bin/Release/mono-3.5/Stage1/Nemerle.dll
+	local nemerledll=bin/Release/mono-"${SLOT}"/Stage1/Nemerle.dll
 	egacinstall "${nemerledll}" \
 		|| die "couldn't install ${nemerledll} in the global assembly cache"
-	local nemerlecompilerdll=bin/Release/mono-3.5/Stage1/Nemerle.Compiler.dll
+	local nemerlecompilerdll=bin/Release/mono-"${SLOT}"/Stage1/Nemerle.Compiler.dll
 	egacinstall "${nemerlecompilerdll}" \
 		|| die "couldn't install ${nemerlecompilerdll} in the global assembly cache"
-	local nemerlemacrosdll=bin/Release/mono-3.5/Stage1/Nemerle.Macros.dll
+	local nemerlemacrosdll=bin/Release/mono-"${SLOT}"/Stage1/Nemerle.Macros.dll
 	egacinstall "${nemerlemacrosdll}" \
 		|| die "couldn't install ${nemerlemacrosdll} in the global assembly cache"
 	elog "Installing ncc"
 	dodoc README AUTHORS INSTALL NEWS
 	into /usr
-	doins bin/Release/mono-3.5/Stage1/ncc.exe
+	doins bin/Release/mono-"${SLOT}"/Stage1/ncc.exe
 }
 
 pkg_postinst() {
