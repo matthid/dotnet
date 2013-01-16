@@ -4,7 +4,7 @@
 
 EAPI="5"
 
-inherit mono eutils multilib git-2
+inherit mono git-2
 
 DESCRIPTION="A hybrid programming language for .NET / Mono platforms"
 HOMEPAGE="http://www.nemerle.org/"
@@ -31,7 +31,7 @@ src_compile() {
 src_install()
 {
 	elog "Installing libraries"
-	insinto "/usr/$(get_libdir)/${PN}"
+	insinto "/usr/$(get_libdir)/mono/${PN}"
 	doins bin/Release/mono-3.5/Stage1/*.dll || die "installing libraries failed"
 	elog "Registering libraries to egac"
 	local nemerledll=bin/Release/mono-3.5/Stage1/Nemerle.dll
@@ -46,5 +46,10 @@ src_install()
 	elog "Installing ncc"
 	dodoc README AUTHORS INSTALL NEWS
 	into /usr
-	dobin bin/Release/mono-3.5/Stage1/ncc.exe
+	doins bin/Release/mono-3.5/Stage1/ncc.exe
+}
+
+pkg_postinst() {
+	echo "mono /usr/$(get_libdir)/mono/${PN}/ncc.exe \"\$@\"" > /usr/bin/ncc
+	chmod 666 /usr/bin/ncc
 }
