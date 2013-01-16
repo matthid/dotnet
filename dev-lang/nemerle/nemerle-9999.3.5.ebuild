@@ -4,7 +4,7 @@
 
 EAPI="5"
 
-inherit mono git-2
+inherit versionator mono git-2
 
 DESCRIPTION="A hybrid programming language for .NET / Mono platforms"
 HOMEPAGE="http://www.nemerle.org/"
@@ -14,7 +14,7 @@ SRC_URI=""
 EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
 
 LICENSE="BSD"
-SLOT="3.5"
+SLOT=get_after_major_version "${PV}"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
@@ -31,7 +31,7 @@ src_compile() {
 src_install()
 {
 	elog "Installing libraries"
-	insinto "/usr/$(get_libdir)/mono/${SLOT}/${PN}"
+	insinto "/usr/$(get_libdir)/mono/${PN}/${SLOT}"
 	doins bin/Release/mono-"${SLOT}"/Stage1/*.dll || die "installing libraries failed"
 	elog "Registering libraries to egac"
 	local nemerledll=bin/Release/mono-"${SLOT}"/Stage1/Nemerle.dll
