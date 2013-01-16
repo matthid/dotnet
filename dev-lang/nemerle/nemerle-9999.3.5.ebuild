@@ -14,7 +14,8 @@ SRC_URI=""
 EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
 
 LICENSE="BSD"
-SLOT=get_after_major_version "${PV}"
+FRAMEWORK=get_after_major_version
+SLOT="${FRAMEWORK}"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
@@ -25,31 +26,31 @@ src_configure() { :; }
 
 src_compile() {
 	elog "Nemerle sources compiling : "
-	xbuild NemerleAll-Mono.nproj /t:Stage1 /p:Configuration=Release /tv:4.0 /p:TargetFrameworkVersion=v"${SLOT}"
+	xbuild NemerleAll-Mono.nproj /t:Stage1 /p:Configuration=Release /tv:4.0 /p:TargetFrameworkVersion=v"${FRAMEWORK}"
 }
 
 src_install()
 {
 	elog "Installing libraries"
-	insinto "/usr/$(get_libdir)/mono/${PN}/${SLOT}"
+	insinto "/usr/$(get_libdir)/mono/${PN}/${FRAMEWORK}"
 	doins bin/Release/mono-"${SLOT}"/Stage1/*.dll || die "installing libraries failed"
 	elog "Registering libraries to egac"
-	local nemerledll=bin/Release/mono-"${SLOT}"/Stage1/Nemerle.dll
+	local nemerledll=bin/Release/mono-"${FRAMEWORK}"/Stage1/Nemerle.dll
 	egacinstall "${nemerledll}" \
 		|| die "couldn't install ${nemerledll} in the global assembly cache"
-	local nemerlecompilerdll=bin/Release/mono-"${SLOT}"/Stage1/Nemerle.Compiler.dll
+	local nemerlecompilerdll=bin/Release/mono-"${FRAMEWORK}"/Stage1/Nemerle.Compiler.dll
 	egacinstall "${nemerlecompilerdll}" \
 		|| die "couldn't install ${nemerlecompilerdll} in the global assembly cache"
-	local nemerlemacrosdll=bin/Release/mono-"${SLOT}"/Stage1/Nemerle.Macros.dll
+	local nemerlemacrosdll=bin/Release/mono-"${FRAMEWORK}"/Stage1/Nemerle.Macros.dll
 	egacinstall "${nemerlemacrosdll}" \
 		|| die "couldn't install ${nemerlemacrosdll} in the global assembly cache"
 	elog "Installing ncc"
 	dodoc README AUTHORS INSTALL NEWS
 	into /usr
-	doins bin/Release/mono-"${SLOT}"/Stage1/ncc.exe
+	doins bin/Release/mono-"${FRAMEWORK}"/Stage1/ncc.exe
 }
 
 pkg_postinst() {
-	echo "mono /usr/$(get_libdir)/mono/${PN}/${SLOT}/ncc.exe \"\$@\"" > /usr/bin/ncc
+	echo "mono /usr/$(get_libdir)/mono/${PN}/${FRAMEWORK}/ncc.exe \"\$@\"" > /usr/bin/ncc
 	chmod 777 /usr/bin/ncc
 }
