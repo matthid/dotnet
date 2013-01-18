@@ -12,7 +12,7 @@ inherit mono
 # @FUNCTION: nuget_src_unpack
 # @DESCRIPTION: Runs nuget.
 nuget_src_unpack() { 
-	if [[ $PN == *.* ]]
+	if [[ $PN == *_* ]]
 	then
 		NPN=${PN/_/.}
 	else
