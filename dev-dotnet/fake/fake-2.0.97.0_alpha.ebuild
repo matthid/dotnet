@@ -21,12 +21,6 @@ RDEPEND="${DEPEND}"
 src_install() {
 	elog "Installing libraries"
 	insinto /usr/lib/mono/4.0/
-	if [[ $PV == *_alpha* ]]
-	then
-		NPV=${PV/_/-}
-	else
-		NPV=${PV}
-	fi
 	doins FAKE."${NPV}"/tools/FAKE.exe || die
 	doins FAKE."${NPV}"/tools/FakeLib.dll || die
 	doins FAKE."${NPV}"/tools/Newtonsoft.Json.dll

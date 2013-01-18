@@ -4,7 +4,7 @@
 
 EAPI="5"
 
-inherit versionator mono git-2
+inherit mono git-2
 
 DESCRIPTION="A hybrid programming language for .NET / Mono platforms"
 HOMEPAGE="http://www.nemerle.org/"
@@ -12,10 +12,10 @@ HOMEPAGE="http://www.nemerle.org/"
 SRC_URI=""
 
 EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
-#EGIT_MASTER="UnixSupport"
+EGIT_MASTER="master" #UnixSupport
 
 LICENSE="BSD"
-FRAMEWORK="$(get_after_major_version)"
+FRAMEWORK="4.5"
 SLOT="${FRAMEWORK}"
 KEYWORDS="~x86 ~amd64"
 IUSE=""

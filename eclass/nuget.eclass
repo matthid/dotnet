@@ -9,21 +9,22 @@
 
 inherit mono
 
+if [[ $PN == *_* ]]
+then
+   	NPN=${PN/_/.}
+else
+	NPN=${PN}
+fi
+if [[ $PV == *_alpha* ]]
+then
+   	NPV=${PV/_/-}
+else
+   	NPV=${PV}
+fi
+
 # @FUNCTION: nuget_src_unpack
 # @DESCRIPTION: Runs nuget.
 nuget_src_unpack() { 
-	if [[ $PN == *_* ]]
-	then
-		NPN=${PN/_/.}
-	else
-		NPN=${PN}
-	fi
-	if [[ $PV == *_alpha* ]]
-	then
-		NPV=${PV/_/-}
-	else
-		NPV=${PV}
-	fi
 	nuget install "${NPN}" -Version "${NPV}" -OutputDirectory "${P}"
 }
 
