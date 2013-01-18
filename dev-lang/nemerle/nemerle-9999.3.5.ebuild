@@ -12,7 +12,7 @@ HOMEPAGE="http://www.nemerle.org/"
 SRC_URI=""
 
 EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
-EGIT_MASTER="UnixSupport"
+#EGIT_MASTER="UnixSupport"
 
 LICENSE="BSD"
 FRAMEWORK="$(get_after_major_version)"
