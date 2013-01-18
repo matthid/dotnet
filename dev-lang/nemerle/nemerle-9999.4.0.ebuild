@@ -23,6 +23,17 @@ IUSE=""
 DEPEND=">dev-lang/mono-2.11.3"
 RDEPEND="${DEPEND}"
 
+pkg_pretend() {
+	if [[ ${MERGE_TYPE} != buildonly ]] && has collision-protect ${FEATURES}; then
+		if [ -f /usr/bin/ncc]; then
+			eerror "FEATURES=\"collision-protect\" is enabled, which will prevent overwriting"
+			eerror "symlinks that were formerly managed by eselect opengl. You must disable"
+			eerror "collision-protect or remove /usr/bin/ncc"
+			die "collision-protect cannot overwrite libGLU$(get_libname)*"
+		fi
+	fi
+}
+
 src_configure() { :; }
 
 src_compile() {
