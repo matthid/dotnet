@@ -19,7 +19,7 @@ IUSE=""
 RDEPEND="dev-db/sqlite:3"
 DEPEND="${RDEPEND}"
 
-MAKEOPTS="${MAKEOPTS} -j1"
+#MAKEOPTS="${MAKEOPTS} -j1"
 
 src_prepare() {
 	# Added try/catch around EndRequest Record sending, bug #432750
