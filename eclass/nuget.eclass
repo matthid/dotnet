@@ -12,14 +12,19 @@ inherit mono
 # @FUNCTION: nuget_src_unpack
 # @DESCRIPTION: Runs nuget.
 nuget_src_unpack() { 
-	if [[ $PV == *_alpha* ]]
-	then 
-		echo "WARNING: Alpha version"
-		NPV=${PV/_/-} 
-		nuget install "${PN}" -Version "${NPV}" -OutputDirectory "${P}"
+	if [[ $PN == *.* ]]
+	then
+		NPN=${PN/_/.}
 	else
-		nuget install "${PN}" -Version "${PV}" -OutputDirectory "${P}"
+		NPN=${PN}
 	fi
+	if [[ $PV == *_alpha* ]]
+	then
+		NPV=${PV/_/-}
+	else
+		NPV=${PV}
+	fi
+	nuget install "${NPN}" -Version "${NPV}" -OutputDirectory "${P}"
 }
 
 # @FUNCTION: nuget_src_configure
