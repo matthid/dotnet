@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/go-mono.eclass,v 1.14 2012/05/02 18:31:42 jdhore Exp $
+# $Header: $
 
 # @ECLASS: go-mono.eclass
 # @MAINTAINERS:
@@ -67,8 +67,7 @@ DEPEND="${DEPEND}
 	userland_GNU? ( >=sys-apps/findutils-4.4.0 )"
 
 # @FUNCTION: go-mono_src_unpack
-# @DESCRIPTION:
-# Runs default()
+# @DESCRIPTION: Runs default()
 go-mono_src_unpack() {
 	if [[ "${PV%.9999}" != "${PV}" ||  "${PV}" == "9999" ]]
 	then
@@ -80,8 +79,7 @@ go-mono_src_unpack() {
 }
 
 # @FUNCTION: go-mono_src_prepare
-# @DESCRIPTION:
-# Runs autopatch from base.eclass, if PATCHES is set.
+# @DESCRIPTION: Runs autopatch from base.eclass, if PATCHES is set.
 go-mono_src_prepare() {
 	if [[ "${PV%.9999}" != "${PV}" ||  "${PV}" == "9999" ]]
 	then

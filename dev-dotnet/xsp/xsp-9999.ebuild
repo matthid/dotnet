@@ -33,8 +33,8 @@ src_prepare() {
 #TODO: FIX
 src_configure() {
 	myeconfargs=("--enable-maintainer-mode")
-	#$(use test && printf "--with_unit_tests" || printf "" )
-	#$(use doc && printf "--doc" || printf "" ))
+	use test && myeconfargs+=("--with_unit_tests")
+	use doc && myeconfargs+=("--doc")
 	autotools-utils_src_configure
 }
 
