@@ -47,7 +47,7 @@ src_install()
 {
 	elog "Installing libraries"
 	insinto "/usr/$(get_libdir)/mono/${PN}/${FRAMEWORK}"
-	doins bin/Release/mono-"${SLOT}"/Stage1/*.dll || die "installing libraries failed"
+	doins bin/Release/mono-"${FRAMEWORK}"/Stage1/*.dll || die "installing libraries failed"
 	elog "Registering libraries to egac"
 	local nemerledll=bin/Release/mono-"${FRAMEWORK}"/Stage1/Nemerle.dll
 	egacinstall "${nemerledll}" \
