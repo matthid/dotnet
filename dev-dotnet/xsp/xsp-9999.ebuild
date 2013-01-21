@@ -26,7 +26,7 @@ AUTOTOOLS_AUTORECONF=yes
 
 ACLOCAL_AMFLAGS="-I build/m4/shamrock -I build/m4/shave"
 src_prepare() {
-	epatch "${FILESDIR}/tmpfix.patch"
+	epatch "${FILESDIR}/aclocal-fix.patch"
 	autotools-utils_src_prepare
 }
 
@@ -48,7 +48,7 @@ pkg_preinst() {
 }
 
 src_install() {
-	mv_command="cp -ar" go-mono_src_install
+	mv_command="cp -ar" autotools-utils_src_install
 	newinitd "${PATCHDIR}"/xsp.initd xsp
 	newinitd "${PATCHDIR}"/mod-mono-server-r1.initd mod-mono-server
 	newconfd "${PATCHDIR}"/xsp.confd xsp
