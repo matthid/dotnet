@@ -14,23 +14,20 @@ HOMEPAGE="http://www.mono-project.com/ASP.NET"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="" #~amd64 ~ppc ~x86
+KEYWORDS="~amd64 ~ppc ~x86"
 IUSE="doc test"
 
 RDEPEND="dev-db/sqlite:3"
 DEPEND="${RDEPEND}"
 
 AUTOTOOLS_AUTORECONF=yes
-#AUTOTOOLS_IN_SOURCE_BUILD=1
 
 ACLOCAL_AMFLAGS="-I build/m4/shamrock -I build/m4/shave"
-
 src_prepare() {
 	epatch "${FILESDIR}/tmpfix.patch"
 	autotools-utils_src_prepare
 }
 
-#TODO: FIX
 src_configure() {
 	myeconfargs=("--enable-maintainer-mode")
 	use test && myeconfargs+=("--with_unit_tests")
@@ -38,7 +35,6 @@ src_configure() {
 	autotools-utils_src_configure
 }
 
-#TODO: FIX
 src_compile() {
     autotools-utils_src_compile --gnu --add-missing --force --copy
 }
