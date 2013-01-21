@@ -3,11 +3,12 @@
 # $Header: $
 
 EAPI=5
+USE_DOTNET="net35 net40 net45"
+
+inherit git-2 mono
 
 EGIT_REPO_URI="git://github.com/Cynede/FAKE.git"
 EGIT_MASTER="develop"
-
-inherit git-2
 
 DESCRIPTION="FAKE - F# Make"
 HOMEPAGE="https://github.com/Cynede/FAKE"
@@ -28,12 +29,12 @@ src_prepare() {
 
 src_install() {
 	elog "Installing libraries"
-	insinto /usr/lib/mono/4.0/
+	insinto /usr/lib/mono/"${FRAMEWORK}"/
 	doins build/FAKE.exe || die
 	doins build/FakeLib.dll || die
 }
 
 pkg_postinst() {
-	echo "mono /usr/lib/mono/4.0/FAKE.exe \"\$@\"" > /usr/bin/fake
+	echo "mono /usr/lib/mono/${FRAMEWORK}/FAKE.exe \"\$@\"" > /usr/bin/fake
 	chmod 777 /usr/bin/fake
 }

@@ -1,0 +1,12 @@
+--- Makefile_orig.am	2013-01-21 11:46:49.351162274 +0400
++++ Makefile.am	2013-01-21 11:47:13.580859874 +0400
+@@ -1,9 +1 @@
+ SUBDIRS=build man src test tools scripts packaging
+-
+-if UNITTESTS
+-SUBDIRS += unittests
+-endif
+-
+-if BUILD_DOCS
+-SUBDIRS += docs
+-endif

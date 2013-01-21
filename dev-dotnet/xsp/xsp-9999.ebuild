@@ -5,29 +5,42 @@
 EAPI="5"
 
 USE_DOTNET="net35 net40 net45"
-
-inherit eutils go-mono mono user
-
 PATCHDIR="${FILESDIR}/2.2/"
+
+inherit eutils go-mono mono user git-2 autotools-utils
 
 DESCRIPTION="XSP is a small web server that can host ASP.NET pages"
 HOMEPAGE="http://www.mono-project.com/ASP.NET"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="amd64 ppc x86"
-IUSE=""
+KEYWORDS="" #~amd64 ~ppc ~x86
+IUSE="doc test"
 
 RDEPEND="dev-db/sqlite:3"
 DEPEND="${RDEPEND}"
 
+AUTOTOOLS_AUTORECONF=yes
+#AUTOTOOLS_IN_SOURCE_BUILD=1
+
+ACLOCAL_AMFLAGS="-I build/m4/shamrock -I build/m4/shave"
+
 src_prepare() {
-	# Added try/catch around EndRequest Record sending, bug #432750
-	epatch "${FILESDIR}/${PN}-2.10.2-endrequest.patch"
+	epatch "${FILESDIR}/tmpfix.patch"
+	autotools-utils_src_prepare
 }
 
+#TODO: FIX
 src_configure() {
-	default
+	myeconfargs=("--enable-maintainer-mode")
+	#$(use test && printf "--with_unit_tests" || printf "" )
+	#$(use doc && printf "--doc" || printf "" ))
+	autotools-utils_src_configure
+}
+
+#TODO: FIX
+src_compile() {
+    autotools-utils_src_compile --gnu --add-missing --force --copy
 }
 
 pkg_preinst() {

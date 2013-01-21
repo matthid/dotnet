@@ -34,14 +34,14 @@ then
 	GO_MONO_P=${P}
 	EGIT_REPO_URI="http://github.com/mono/${GIT_PN}.git"
 	SRC_URI=""
-	inherit autotools git
+	inherit autotools git-2
 elif [[ "${PV%.9999}" != "${PV}" ]]
 then
 	GO_MONO_P=${P}
 	EGIT_REPO_URI="http://github.com/mono/${GIT_PN}.git"
 	EGIT_BRANCH="mono-$(get_version_component_range 1)-$(get_version_component_range 2)${GO_MONO_SUB_BRANCH}"
 	SRC_URI=""
-	inherit autotools git
+	inherit autotools git-2
 else
 	GO_MONO_P=${P}
 	SRC_URI="http://download.mono-project.com/sources/${PN}/${P}.tar.bz2"

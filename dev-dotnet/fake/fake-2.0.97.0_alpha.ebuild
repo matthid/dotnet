@@ -3,7 +3,10 @@
 # $Header: $
 
 EAPI=5
-inherit nuget
+
+USE_DOTNET="net35 net40 net45"
+
+inherit nuget mono
 
 DESCRIPTION="FAKE - F# Make"
 HOMEPAGE="http://nuget.org/packages/FAKE"
@@ -20,7 +23,7 @@ RDEPEND="${DEPEND}"
 
 src_install() {
 	elog "Installing libraries"
-	insinto /usr/lib/mono/4.0/
+	insinto /usr/lib/mono/"${FRAMEWORK}"/
 	doins FAKE."${NPV}"/tools/FAKE.exe || die
 	doins FAKE."${NPV}"/tools/FakeLib.dll || die
 	doins FAKE."${NPV}"/tools/Newtonsoft.Json.dll
@@ -28,6 +31,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	echo "mono /usr/lib/mono/4.0/FAKE.exe \"$@\"" > /usr/bin/fake
+	echo "mono /usr/lib/mono/${FRAMEWORK}/FAKE.exe \"$@\"" > /usr/bin/fake
 	chmod 777 /usr/bin/fake
 }

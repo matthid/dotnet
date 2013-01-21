@@ -3,7 +3,9 @@
 # $Header: $
 
 EAPI=5
-inherit nuget
+USE_DOTNET="net40"
+
+inherit nuget mono
 
 DESCRIPTION="unit-testing framework for all .Net languages"
 HOMEPAGE="http://nunit.org"
@@ -19,13 +21,7 @@ RDEPEND="${DEPEND}"
 
 src_install() {
 	elog "Installing libraries"
-	insinto /usr/lib/mono/4.0/
-	if [[ $PV == *_alpha* ]]
-	then
-		NPV=${PV/_/-}
-	else
-		NPV=${PV}
-	fi
+	insinto /usr/lib/mono/"${FRAMEWORK}"/
 	doins NUnit."${NPV}"/lib/nunit.framework.dll || die
 }
 

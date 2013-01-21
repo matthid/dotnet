@@ -3,11 +3,11 @@
 # $Header: $
 
 EAPI=5
+USE_DOTNET="net35 net40 net45"
+
+inherit git-2 mono
 
 EGIT_REPO_URI="https://git01.codeplex.com/nuget"
-
-inherit git-2
-
 DESCRIPTION="Nuget - .NET Package Manager"
 HOMEPAGE="http://nuget.codeplex.com"
 SRC_URI=""
@@ -26,13 +26,13 @@ src_prepare() {
 
 src_install() {
 	elog "Installing libraries"
-	insinto /usr/lib/mono/4.0/
+	insinto /usr/lib/mono/"${FRAMEWORK}"/
 	doins src/CommandLine/obj/Mono\ Release/NuGet.exe || die
 	doins src/Core/obj/Mono\ Release/NuGet.Core.dll || die
 }
 
 pkg_postinst() {
 	mozroots --import --sync --machine
-	echo "mono /usr/lib/mono/4.0/NuGet.exe \"\$@\"" > /usr/bin/nuget
+	echo "mono /usr/lib/mono/${FRAMEWORK}/NuGet.exe \"\$@\"" > /usr/bin/nuget
 	chmod 777 /usr/bin/nuget
 }
