@@ -1,9 +1,9 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/eclass/mono.eclass,v 1.15 2011/08/22 04:46:32 vapier Exp $
+# $Header: $
 
 # @ECLASS: mono.eclass
-# @MAINTAINER: dotnet@gentoo.org
+# @MAINTAINER: dotnet@gentoo.org, heather@cynede.net
 # @BLURB: common settings and functions for mono and dotnet related packages
 # @DESCRIPTION:
 # The mono eclass contains common environment settings that are useful for
@@ -11,7 +11,31 @@
 # MONO_SHARED_DIR and sets LC_ALL in order to prevent errors during compilation
 # of dotnet packages.
 
-inherit multilib
+case ${EAPI:-0} in
+  0) die "this eclass doesn't support EAPI 0" ;;
+  *) ;;
+esac
+
+IUSE="${IUSE} ${USE_DOTNET}"
+
+# @FUNCTION: mono_pkg_pretend
+# @DESCRIPTION:  This function set FRAMEWORK
+mono_pkg_pretend() {
+	if use net45; then
+		FRAMEWORK="4.5"
+	elif use net40; then
+		FRAMEWORK="4.0"
+	elif use net35; then
+		FRAMEWORK="3.5"
+	elif use net20; then
+		FRAMEWORK="2.0"
+	else
+		#die "$1: unknown .net framework"
+		#for older ebuilds compatibility:
+		FRAMEWORK="4.0"
+	fi
+	echo " *** USING .NET ${FRAMEWORK} FRAMEVORK *** "
+}
 
 # >=mono-0.92 versions using mcs -pkg:foo-sharp require shared memory, so we set the
 # shared dir to ${T} so that ${T}/.wapi can be used during the install process.
@@ -78,3 +102,5 @@ mono_multilib_comply() {
 
 	fi
 }
+
+EXPORT_FUNCTIONS pkg_pretend

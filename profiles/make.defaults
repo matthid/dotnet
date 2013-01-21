@@ -1,1 +1,4 @@
-DOTNET_TERGETS="net-2.0 net-3.5 net-4.0 net-4.5"
+CUSTOM_PROFILE="yes"
+DOTNET_TERGETS="net20 net35 net40 net45"
+USE="net45"
+FRAMEWORK="4.5"

@@ -4,6 +4,8 @@
 
 EAPI="5"
 
+USE_DOTNET="net35 net40 net45"
+
 inherit mono git-2
 
 DESCRIPTION="A hybrid programming language for .NET / Mono platforms"
@@ -15,8 +17,7 @@ EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
 EGIT_MASTER="master" #UnixSupport
 
 LICENSE="BSD"
-FRAMEWORK="4.5"
-SLOT="${FRAMEWORK}"
+SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
@@ -24,6 +25,7 @@ DEPEND=">dev-lang/mono-2.11.3"
 RDEPEND="${DEPEND}"
 
 pkg_pretend() {
+	mono_pkg_pretend
 	if [[ ${MERGE_TYPE} != buildonly ]] && has collision-protect ${FEATURES}; then
 		if [ -f /usr/bin/ncc]; then
 			eerror "FEATURES=\"collision-protect\" is enabled, which will prevent overwriting"
