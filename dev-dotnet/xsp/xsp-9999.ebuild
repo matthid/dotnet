@@ -38,7 +38,7 @@ src_configure() {
 }
 
 src_compile() {
-    autotools-utils_src_compile --gnu --add-missing --force --copy
+    autotools-utils_src_compile
 }
 
 pkg_preinst() {
