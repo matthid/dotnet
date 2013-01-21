@@ -4,9 +4,11 @@
 
 EAPI=5
 
-EGIT_REPO_URI="git://github.com/fsharp/fsharp.git"
+USE_DOTNET="net45"
 
-inherit git-2 autotools
+inherit git-2 autotools mono
+
+EGIT_REPO_URI="git://github.com/fsharp/fsharp.git"
 
 DESCRIPTION="The F# Compiler"
 HOMEPAGE="https://github.com/fsharp/fsharp"
@@ -16,6 +18,8 @@ LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
+
+MAKEOPTS="-j1"
 
 DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
