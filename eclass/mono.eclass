@@ -18,12 +18,12 @@ esac
 
 inherit eutils
 
-for x in ${USE_DOTNET} ; do
+for x in ${USE_DOTNET}; do
    case ${x} in 
-      net45) IUSE+=" net45";;
-      net40) IUSE+=" net40";;
-      net35) IUSE+=" net35";;
-	  net20) IUSE+=" net20";;
+      net45) if use dotnet_targets_net45; then IUSE+=" +net45"; else IUSE+=" net45"; fi;;
+      net40) if use dotnet_targets_net40; then IUSE+=" +net40"; else IUSE+=" net40"; fi;;
+      net35) if use dotnet_targets_net35; then IUSE+=" +net35"; else IUSE+=" net35"; fi;;
+	  net20) if use dotnet_targets_net20; then IUSE+=" +net20"; else IUSE+=" net20"; fi;;
    esac
 done
 
