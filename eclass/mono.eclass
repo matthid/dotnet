@@ -28,6 +28,9 @@ for x in ${USE_DOTNET}; do
    esac
 done
 
+#DEBUG:
+FRAMEWORK="4.5"
+
 # @FUNCTION: mono_pkg_pretend
 # @DESCRIPTION:  This function set FRAMEWORK
 mono_pkg_pretend() {
