@@ -14,7 +14,7 @@ HOMEPAGE="http://www.nemerle.org/"
 SRC_URI=""
 
 EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
-EGIT_MASTER="master" #UnixSupport
+EGIT_MASTER="master"
 
 LICENSE="BSD"
 SLOT="0"

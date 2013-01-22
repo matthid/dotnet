@@ -33,14 +33,23 @@ done
 mono_pkg_pretend() {
 	for x in ${USE_DOTNET} ; do
 		case ${x} in 
-			net45) if use net45; then FRAMEWORK="4.5"; fi; break;;
-			net40) if use net40; then FRAMEWORK="4.0"; fi; break;;
-			net35) if use net35; then FRAMEWORK="3.5"; fi; break;;
-			net20) if use net20; then FRAMEWORK="2.0"; fi; break;;
+			net45) if use net45; then F="4.5"; fi;;
+			net40) if use net40; then F="4.0"; fi;;
+			net35) if use net35; then F="3.5"; fi;;
+			net20) if use net20; then F="2.0"; fi;;
 		esac
+		if [[ -z ${FRAMEWORK} ]]; then
+			if [[ ${F} ]]; then 
+				FRAMEWORK="${F}";
+			fi
+		else	
+			if [[ ${FRAMEWORK} < ${F} ]]; then 
+				FRAMEWORK="${F}"
+			fi
+		fi
 	done
 	if [[ -z ${FRAMEWORK} ]]; then
-		FRAMEWORK="4.0"
+		FRAMEWORK="5.0"
 	fi
 	echo " *** USING .NET ${FRAMEWORK} FRAMEWORK *** "
 }
