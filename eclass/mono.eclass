@@ -46,11 +46,14 @@ mono_pkg_pretend() {
 				FRAMEWORK="${F}";
 			fi
 		else	
-			FRAMEWORK="${F}"
-		#TODO:
-		#	if [[ ${FRAMEWORK} < ${F} ]]; then 
-		#		FRAMEWORK="${F}"
-		#	fi
+		    #TODO: BASH HACKER REQUEST
+			if [[ ${SHELL} == "/bin/zsh" ]]
+				if [[ ${FRAMEWORK} < ${F} ]]; then 
+					FRAMEWORK="${F}"
+				fi
+			else
+				FRAMEWORK="${F}"
+			fi
 		fi
 	done
 	if [[ -z ${FRAMEWORK} ]]; then
