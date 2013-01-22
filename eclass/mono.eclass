@@ -13,7 +13,8 @@
 
 case ${EAPI:-0} in
   0) die "this eclass doesn't support EAPI 0" ;;
-  *) ;;
+  1|2|3) ;;
+  *) ;; #if [[ ${USE_DOTNET} ]]; then REQUIRED_USE="|| (${USE_DOTNET})"; fi;;
 esac
 
 inherit eutils
@@ -26,8 +27,6 @@ for x in ${USE_DOTNET}; do
 	  net20) if [[ ${DOTNET_TARGETS} == *net20* ]]; then IUSE+=" +net20"; else IUSE+=" net20"; fi;;
    esac
 done
-
-#REQUIRED_USE="|| (${USE_DOTNET})"
 
 # @FUNCTION: mono_pkg_pretend
 # @DESCRIPTION:  This function set FRAMEWORK
