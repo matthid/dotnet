@@ -27,20 +27,20 @@ for x in ${USE_DOTNET} ; do
    esac
 done
 
+REQUIRED_USE="|| (${USE_DOTNET})"
+
 # @FUNCTION: mono_pkg_pretend
 # @DESCRIPTION:  This function set FRAMEWORK
 mono_pkg_pretend() {
-	if use net45; then
-		FRAMEWORK="4.5"
-	elif use net40; then
-		FRAMEWORK="4.0"
-	elif use net35; then
-		FRAMEWORK="3.5"
-	elif use net20; then
-		FRAMEWORK="2.0"
-	else
-		#die "$1: unknown .net framework"
-		#for older ebuilds compatibility:
+	for x in ${USE_DOTNET} ; do
+		case ${x} in 
+			net45) if use net45; then FRAMEWORK="4.5"; fi; break;;
+			net40) if use net40; then FRAMEWORK="4.0"; fi; break;;
+			net35) if use net35; then FRAMEWORK="3.5"; fi; break;;
+			net20) if use net20; then FRAMEWORK="2.0"; fi; break;;
+		esac
+	done
+	if [[ -z ${FRAMEWORK} ]]; then
 		FRAMEWORK="4.0"
 	fi
 	echo " *** USING .NET ${FRAMEWORK} FRAMEVORK *** "
