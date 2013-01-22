@@ -20,11 +20,8 @@ IUSE="doc test"
 RDEPEND="dev-db/sqlite:3"
 DEPEND="${RDEPEND}"
 
-MAKEOPTS="-j1"
-
 AUTOTOOLS_AUTORECONF=yes
 
-ACLOCAL_AMFLAGS="-I build/m4/shamrock -I build/m4/shave"
 src_prepare() {
 	epatch "${FILESDIR}/aclocal-fix.patch"
 	autotools-utils_src_prepare
