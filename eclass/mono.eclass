@@ -24,7 +24,6 @@ for x in ${USE_DOTNET} ; do
       net40) IUSE+=" net40";;
       net35) IUSE+=" net35";;
 	  net20) IUSE+=" net20";;
-      * ) if [ ! in_iuse net40 ]; then IUSE+=" net40"; fi
    esac
 done
 
