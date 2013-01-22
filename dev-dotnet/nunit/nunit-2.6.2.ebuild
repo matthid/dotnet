@@ -16,7 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND="dev-lang/mono"
+DEPEND="!dev-lang/mono"
 RDEPEND="${DEPEND}"
 
 src_install() {

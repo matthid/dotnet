@@ -17,7 +17,8 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-DEPEND="dev-lang/mono"
+DEPEND="dev-lang/mono
+!dev-dotnet/nuget"
 RDEPEND="${DEPEND}"
 
 pkg_pretend() {
