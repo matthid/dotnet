@@ -42,7 +42,7 @@ mono_pkg_pretend() {
 	if [[ -z ${FRAMEWORK} ]]; then
 		FRAMEWORK="4.0"
 	fi
-	echo " *** USING .NET ${FRAMEWORK} FRAMEVORK *** "
+	echo " *** USING .NET ${FRAMEWORK} FRAMEWORK *** "
 }
 
 # >=mono-0.92 versions using mcs -pkg:foo-sharp require shared memory, so we set the
