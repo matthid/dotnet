@@ -43,13 +43,15 @@ mono_pkg_pretend() {
 				FRAMEWORK="${F}";
 			fi
 		else	
-			if [[ ${FRAMEWORK} < ${F} ]]; then 
-				FRAMEWORK="${F}"
-			fi
+			FRAMEWORK="${F}"
+		#TODO:
+		#	if [[ ${FRAMEWORK} < ${F} ]]; then 
+		#		FRAMEWORK="${F}"
+		#	fi
 		fi
 	done
 	if [[ -z ${FRAMEWORK} ]]; then
-		FRAMEWORK="5.0"
+		FRAMEWORK="4.0"
 	fi
 	echo " *** USING .NET ${FRAMEWORK} FRAMEWORK *** "
 }
