@@ -27,7 +27,7 @@ for x in ${USE_DOTNET} ; do
    esac
 done
 
-REQUIRED_USE="|| (${USE_DOTNET})"
+#REQUIRED_USE="|| (${USE_DOTNET})"
 
 # @FUNCTION: mono_pkg_pretend
 # @DESCRIPTION:  This function set FRAMEWORK
