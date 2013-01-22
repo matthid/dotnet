@@ -16,7 +16,17 @@ case ${EAPI:-0} in
   *) ;;
 esac
 
-IUSE="${IUSE} ${USE_DOTNET}"
+inherit eutils
+
+for x in ${USE_DOTNET} ; do
+   case ${x} in 
+      net45) IUSE="${IUSE} net45";;
+      net40) IUSE="${IUSE} net40";;
+      net35) IUSE="${IUSE} net35";;
+	  net20) IUSE="${IUSE} net20";;
+      * ) if [ ! in_iuse net40 ]; then IUSE="${IUSE} net40"; fi
+   esac
+done
 
 # @FUNCTION: mono_pkg_pretend
 # @DESCRIPTION:  This function set FRAMEWORK
