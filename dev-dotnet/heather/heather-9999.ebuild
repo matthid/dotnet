@@ -6,7 +6,8 @@ EAPI=5
 
 USE_DOTNET="net40 net45"
 
-inherit git-2 fake mono
+#It could not being build with FAKE because FAKE is using it.
+inherit git-2 mono #fake
 
 EGIT_REPO_URI="git://github.com/gentoo-dotnet/Heather.git"
 
@@ -21,6 +22,10 @@ IUSE=""
 
 DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
+
+src_compile() {
+	xbuild src/Heather.fsproj /p:Configuration=Release
+}
 
 src_install() {
 	#local heatherdll=/usr/lib/mono/"${FRAMEWORK}"/Heather.dll
