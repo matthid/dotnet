@@ -18,19 +18,24 @@ SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE=""
+IUSE="+fake"
 
 DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
 
 src_compile() {
-	xbuild src/Heather.fsproj /p:Configuration=Release
+	if use fake; then 
+		if [[ -f /usr/lib/mono/"${FRAMEWORK}"/Heather.dll ]]; then
+			fake
+		else
+			xbuild src/Heather.fsproj /p:Configuration=Release
+		fi
+	else
+		xbuild src/Heather.fsproj /p:Configuration=Release
+	fi
 }
 
 src_install() {
-	#local heatherdll=/usr/lib/mono/"${FRAMEWORK}"/Heather.dll
 	insinto /usr/lib/mono/"${FRAMEWORK}"
 	doins src/bin/Release/Heather.dll
-	#egacinstall "${heatherdll}" \
-	#	|| die "couldn't install ${heatherdll} in the global assembly cache"
 }
