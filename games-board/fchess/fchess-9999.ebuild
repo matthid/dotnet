@@ -19,7 +19,8 @@ SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-DEPEND="dev-lang/mono"
+DEPEND="dev-lang/mono
+dev-dotnet/heather"
 RDEPEND="${DEPEND}"
 
 src_install() {
