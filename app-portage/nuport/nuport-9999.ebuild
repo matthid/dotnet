@@ -29,6 +29,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	echo "mono /usr/lib/mono/${FRAMEWORK}/nuport.exe" > /usr/bin/nuport
+	echo "mono /usr/lib/mono/${FRAMEWORK}/nuport.exe  \"\$@\"" > /usr/bin/nuport
 	chmod 777 /usr/bin/nuport
 }
