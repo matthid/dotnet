@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=5
-USE_DOTNET="net35 net40 net45"
+USE_DOTNET="net40 net45"
 
 inherit git-2 mono
 

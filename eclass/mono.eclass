@@ -81,6 +81,14 @@ export XDG_CONFIG_HOME="${T}"
 
 unset MONO_AOT_CACHE
 
+# @FUNCTION: exbuild
+# @DESCRIPTION: run xbuild with Release configuration and configurated FRAMEWORK
+exbuild() {
+	xbuild "${1}" "${2}" /p:Configuration=Release /tv:4.0 /p:TargetFrameworkVersion=v"${FRAMEWORK}" || die
+}
+
+# @FUNCTION: egacinstall
+# @DESCRIPTION:  install package to GAC
 egacinstall() {
 	use !prefix && has "${EAPI:-0}" 0 1 2 && ED="${D}"
 	gacutil -i "${1}" \
@@ -90,6 +98,8 @@ egacinstall() {
 		|| die "installing ${1} into the Global Assembly Cache failed"
 }
 
+# @FUNCTION: mono_multilib_comply
+# @DESCRIPTION:  multilib comply
 mono_multilib_comply() {
 	use !prefix && has "${EAPI:-0}" 0 1 2 && ED="${D}"
 	local dir finddirs=() mv_command=${mv_command:-mv}

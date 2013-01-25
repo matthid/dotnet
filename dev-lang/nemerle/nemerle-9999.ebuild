@@ -40,7 +40,7 @@ src_configure() { :; }
 
 src_compile() {
 	elog "Nemerle sources compiling : "
-	xbuild NemerleAll-Mono.nproj /t:Stage1 /p:Configuration=Release /tv:4.0 /p:TargetFrameworkVersion=v"${FRAMEWORK}"
+	exbuild NemerleAll-Mono.nproj /t:Stage1
 }
 
 src_install()
