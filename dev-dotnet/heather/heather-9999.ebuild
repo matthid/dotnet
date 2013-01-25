@@ -24,7 +24,7 @@ DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
 
 src_compile() {
-	if use fake; then 
+	if use fake; then
 		if [[ -f /usr/lib/mono/"${FRAMEWORK}"/Heather.dll ]]; then
 			fake
 		else
