@@ -7,11 +7,11 @@ USE_DOTNET="net40 net45"
 
 inherit git-2 mono
 
-EGIT_REPO_URI="git://github.com/Cynede/FAKE.git"
+EGIT_REPO_URI="git://github.com/fsharp/FAKE.git"
 EGIT_MASTER="develop"
 
 DESCRIPTION="FAKE - F# Make"
-HOMEPAGE="https://github.com/Cynede/FAKE"
+HOMEPAGE="https://github.com/fsharp/FAKE"
 SRC_URI=""
 
 LICENSE="MS-PL"

@@ -4,7 +4,7 @@
 
 EAPI=5
 
-USE_DOTNET="net45"
+USE_DOTNET="net40"
 
 inherit git-2 autotools mono
 
@@ -30,6 +30,8 @@ src_prepare() {
 
 #Compatibily for some weird stuff, Must be removed after some fixes
 pkg_postinst() {
+	ln -s /usr/lib/mono/Microsoft\ F\#/v4.0/FSharp.Core.dll /usr/lib/mono/4.0/FSharp.Core.dll
+	ln -s /usr/lib/mono/Microsoft\ F\#/v2.0/FSharp.Core.dll /usr/lib/mono/2.0/FSharp.Core.dll
 	dosym /usr/bin/fsharpc /usr/bin/fsc
 	chmod 666 /etc/mono/registry/last-btime
 }
