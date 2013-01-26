@@ -35,7 +35,11 @@ pkg_postinst() {
 	mkdir /usr/local/lib/mono/2.0
 	mkdir /usr/local/lib/mono/4.0
 	ln -s /usr/lib/mono/Microsoft\ F\#/v4.0/FSharp.Core.dll /usr/local/lib/mono/4.0/FSharp.Core.dll
+	ln -s /usr/lib/mono/Microsoft\ F\#/v4.0/FSharp.Core.optdata /usr/local/lib/mono/4.0/FSharp.Core.optdata
+	ln -s /usr/lib/mono/Microsoft\ F\#/v4.0/FSharp.Core.sigdata /usr/local/lib/mono/4.0/FSharp.Core.sigdata
 	ln -s /usr/lib/mono/Microsoft\ F\#/v2.0/FSharp.Core.dll /usr/local/lib/mono/2.0/FSharp.Core.dll
+	ln -s /usr/lib/mono/Microsoft\ F\#/v2.0/FSharp.Core.optdata /usr/local/lib/mono/2.0/FSharp.Core.optdata
+	ln -s /usr/lib/mono/Microsoft\ F\#/v2.0/FSharp.Core.sigdata /usr/local/lib/mono/2.0/FSharp.Core.sigdata
 	dosym /usr/bin/fsharpc /usr/bin/fsc
 	chmod 666 /etc/mono/registry/last-btime
 }
