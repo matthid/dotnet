@@ -72,7 +72,7 @@ go-mono_src_unpack() {
 	if [[ "${PV%.9999}" != "${PV}" ||  "${PV}" == "9999" ]]
 	then
 		default
-		git_src_unpack
+		git-2_src_unpack
 	else
 		default
 	fi
