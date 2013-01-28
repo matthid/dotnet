@@ -31,9 +31,9 @@ done
 #DEBUG:
 FRAMEWORK="4.5"
 
-# @FUNCTION: mono_pkg_pretend
+# @FUNCTION: mono_src_prepare
 # @DESCRIPTION:  This function set FRAMEWORK
-mono_pkg_pretend() {
+mono_pkg_setup() {
 	for x in ${USE_DOTNET} ; do
 		case ${x} in 
 			net45) if use net45; then F="4.5"; fi;;
@@ -138,4 +138,4 @@ mono_multilib_comply() {
 	fi
 }
 
-EXPORT_FUNCTIONS pkg_pretend
+EXPORT_FUNCTIONS pkg_setup
