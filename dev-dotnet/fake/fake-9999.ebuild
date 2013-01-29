@@ -25,7 +25,7 @@ dev-lang/fsharp"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	./build.sh
+	./mono_build.sh
 }
 
 src_install() {
