@@ -19,6 +19,7 @@ esac
 
 inherit eutils
 
+# SET default use flags according on DOTNET_TARGETS
 for x in ${USE_DOTNET}; do
    case ${x} in 
       net45) if [[ ${DOTNET_TARGETS} == *net45* ]]; then IUSE+=" +net45"; else IUSE+=" net45"; fi;;
@@ -27,9 +28,6 @@ for x in ${USE_DOTNET}; do
 	  net20) if [[ ${DOTNET_TARGETS} == *net20* ]]; then IUSE+=" +net20"; else IUSE+=" net20"; fi;;
    esac
 done
-
-#DEBUG:
-FRAMEWORK="4.5"
 
 # @FUNCTION: mono_src_prepare
 # @DESCRIPTION:  This function set FRAMEWORK
