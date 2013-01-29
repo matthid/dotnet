@@ -21,6 +21,7 @@ DEPEND="dev-lang/mono
 dev-lang/fsharp"
 RDEPEND="${DEPEND}"
 
+#TODO: better installation
 src_install() {
 	elog "Installing libraries"
 	insinto /usr/lib/mono/"${FRAMEWORK}"/
@@ -28,7 +29,7 @@ src_install() {
 	doins WebSharper."${NPV}"/*.exe || die
 }
 
-#pkg_postinst() {
-#	echo "mono /usr/lib/mono/${FRAMEWORK}/FAKE.exe \"$@\"" > /usr/bin/fake
-#	chmod 777 /usr/bin/fake
-#}
+pkg_postinst() {
+	echo "mono /usr/lib/mono/${FRAMEWORK}/WebSharper.v${FRAMEWORK}.exe \"$@\"" > /usr/bin/websharper
+	chmod 777 /usr/bin/websharper
+}
