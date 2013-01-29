@@ -4,7 +4,7 @@
 
 EAPI=5
 
-USE_DOTNET="net45"
+USE_DOTNET="net45 net40"
 
 inherit nuget mono
 
