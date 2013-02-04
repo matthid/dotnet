@@ -8,7 +8,11 @@ USE_DOTNET="net40"
 
 inherit git-2 autotools mono
 
-EGIT_REPO_URI="git://github.com/fsharp/fsharp.git"
+#original source: git://github.com/fsharp/fsharp.git
+
+#This package is for testing so I test various Pull Request here
+#Before they hit main tree
+EGIT_REPO_URI="git://github.com/rneatherway/fsharp.git"
 
 DESCRIPTION="The F# Compiler"
 HOMEPAGE="https://github.com/fsharp/fsharp"
