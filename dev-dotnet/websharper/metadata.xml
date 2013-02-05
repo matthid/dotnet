@@ -4,6 +4,9 @@
 	<maintainer>
 		<email>heather@cynede.net</email>
 	</maintainer>
+	<description>
+	  NuGet:WebSharper
+	</description>
 	<longdescription>
 	  WebSharper
 	</longdescription>
