@@ -4,10 +4,8 @@
 	<maintainer>
 		<email>heather@cynede.net</email>
 	</maintainer>
-	<description>
-	  NuGet:NUnit
-	</description>
 	<longdescription>
+	  NuGet:NUnit
 	  NUnit - unit-testing framework for all .Net languages
 	</longdescription>
 </pkgmetadata>

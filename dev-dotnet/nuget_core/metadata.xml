@@ -4,10 +4,8 @@
 	<maintainer>
 		<email>Heather@Cynede.net</email>
 	</maintainer>
-	<description>
-	  NuGet:NuGet.Core
-	</description>
 	<longdescription>
+	  NuGet:NuGet.Core
 	  Core framework assembly for NuGet that the rest of NuGet builds upon.
 	</longdescription>
 </pkgmetadata>

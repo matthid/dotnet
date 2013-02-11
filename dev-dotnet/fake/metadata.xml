@@ -4,10 +4,8 @@
 	<maintainer>
 		<email>heather@cynede.net</email>
 	</maintainer>
-	<description>
-	  NuGet:FAKE
-	</description>
 	<longdescription>
+	  NuGet:FAKE
 	  FAKE - F# Make
 	</longdescription>
 </pkgmetadata>
