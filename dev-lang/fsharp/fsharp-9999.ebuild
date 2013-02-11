@@ -24,7 +24,6 @@ KEYWORDS=""
 IUSE=""
 
 MAKEOPTS="-j1"#nowarn
-
 DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
 
