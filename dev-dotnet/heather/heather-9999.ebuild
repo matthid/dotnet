@@ -9,10 +9,10 @@ USE_DOTNET="net40 net45"
 #It could not being build with FAKE because FAKE is using it.
 inherit git-2 mono #fake
 
-EGIT_REPO_URI="git://github.com/gentoo-dotnet/Heather.git"
+EGIT_REPO_URI="git://github.com/Cynede/Heather.git"
 
 DESCRIPTION="F# Shell Scripting Library"
-HOMEPAGE="https://github.com/gentoo-dotnet/Heather"
+HOMEPAGE="https://github.com/Cynede/Heather"
 SRC_URI=""
 
 LICENSE="GPL-2"
