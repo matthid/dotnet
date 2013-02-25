@@ -8,8 +8,6 @@ USE_DOTNET="net40"
 
 inherit git-2 autotools mono
 
-#original source: git://github.com/fsharp/fsharp.git
-
 EGIT_REPO_URI="git://github.com/fsharp/fsharp.git"
 
 DESCRIPTION="The F# Compiler"
@@ -21,7 +19,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-MAKEOPTS="-j1"#nowarn
+MAKEOPTS="-j1"
 DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
 
