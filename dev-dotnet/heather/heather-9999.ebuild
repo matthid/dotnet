@@ -6,8 +6,7 @@ EAPI=5
 
 USE_DOTNET="net40 net45"
 
-#It could not being build with FAKE because FAKE is using it.
-inherit git-2 mono #fake
+inherit git-2 mono
 
 EGIT_REPO_URI="git://github.com/Cynede/Heather.git"
 
@@ -18,14 +17,14 @@ SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="+fake"
+IUSE="fake"
 
 DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
 
 src_compile() {
 	if use fake; then
-		if [[ -f /usr/lib/mono/"${FRAMEWORK}"/Heather.dll ]]; then
+		if [[ -f /usr/lib/mono/Heather/"${FRAMEWORK}"/Heather.dll ]]; then
 			fake
 		else
 			xbuild src/Heather.fsproj /p:Configuration=Release
@@ -36,6 +35,6 @@ src_compile() {
 }
 
 src_install() {
-	insinto /usr/lib/mono/"${FRAMEWORK}"
+	insinto /usr/lib/mono/Heather/"${FRAMEWORK}"
 	doins src/bin/Release/Heather.dll
 }
