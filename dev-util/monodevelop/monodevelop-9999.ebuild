@@ -1,19 +1,19 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/monodevelop/monodevelop-4.0.ebuild Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-util/monodevelop/monodevelop-9999.ebuild $
 
 EAPI=5
-inherit fdo-mime gnome2-utils mono versionator eutils
+inherit fdo-mime gnome2-utils mono versionator eutils git-2
 
 DESCRIPTION="Integrated Development Environment for .NET"
 HOMEPAGE="http://www.monodevelop.com/"
-SRC_URI="http://download.mono-project.com/sources/${PN}/${P}.tar.bz2"
+
+EGIT_REPO_URI="git://github.com/Cynede/monodevelop.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-#IT'S STABLE!
-KEYWORDS="amd64 x86"
-IUSE="+subversion +git"
+KEYWORDS=""
+IUSE="subversion +git"
 
 RDEPEND=">=dev-lang/mono-3.0.1
 	>=dev-dotnet/gconf-sharp-2.24.0
