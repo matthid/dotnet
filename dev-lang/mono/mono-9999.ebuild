@@ -58,12 +58,10 @@ pkg_setup() {
 }
 
 src_prepare() {
-
-	#fix automake upstream crap see commit a14e9e5650d978bf21a57470d2a3edeb164407ea
 	cat "${S}/mono/mini/Makefile.am.in" > "${S}/mono/mini/Makefile.am" || die
+	cat "${S}/mono/metadata/Makefile.am.in" > "${S}/mono/metadata/Makefile.am" || die
 
 	go-mono_src_prepare
-
 	# we need to sed in the paxctl -mr in the runtime/mono-wrapper.in so it don't
 	# get killed in the build proces when MPROTEC is enable. #286280
 	# RANDMMAP kill the build proces to #347365
@@ -203,67 +201,3 @@ pkg_postinst() {
 	elog "	Mono.Data.SybaseClient"
 	elog "Also read: http://www.mono-project.com/Sybase"
 }
-
-# NOTICE: THE COPYRIGHT FILES IN THE TARBALL ARE UNCLEAR!
-# WHENEVER YOU THINK SOMETHING IS GPL-2+, IT'S ONLY GPL-2
-# UNLESS MIGUEL DE ICAZA HIMSELF SAYS OTHERWISE.
-
-# mono
-# The code we use is LGPL, but contributions must be made under the MIT/X11
-# license, so Novell can serve its paying customers. Exception is mono/man.
-# LICENSE="LGPL-2.1"
-
-	# mono/man
-	# LICENSE="MIT"
-
-# mcs/mcs
-# mcs/gmcs
-# LICENSE="GPL-2 MIT"
-
-# tests
-# LICENSE="MIT"
-
-# mcs/class
-# Except the listed exceptions:
-# LICENSE="MIT"
-
-	# mcs/class/ByteFX.Data
-	# mcs/class/Npgsql
-	# LICENSE="LGPL-2.1"
-
-	# mcs/class/FirebirdSql.Data.Firebird
-	# LICENSE="IDPL"
-
-	# mcs/class/ICSharpCode.SharpZipLib
-	# LICENSE="GPL-2-with-linking-exception"
-
-	# mcs/class/MicrosoftAjaxLibrary
-	# LICENSE="Ms-Pl"
-
-	# mcs/class/Microsoft.JScript/Microsoft.JScript/TokenStream.cs
-	# mcs/class/Microsoft.JScript/Microsoft.JScript/Token.cs
-	# mcs/class/Microsoft.JScript/Microsoft.JScript/Parser.cs
-	# mcs/class/Microsoft.JScript/Microsoft.JScript/Decompiler.cs
-	# LICENSE="|| ( NPL-1.1 GPL-2 )"
-
-# mcs/jay
-# LICENSE="BSD-4"
-
-# mcs/tools
-# Except the listed exceptions:
-# LICENSE="MIT"
-
-	# mcs/tools/mdoc/Mono.Documentation/monodocs2html.cs
-	# LICENSE="GPL-2"
-
-	# mcs/tools/sqlsharp/SqlSharpCli.cs
-	# LICENSE="GPL-2"
-
-	# mcs/tools/csharp/repl.cs
-	# LICENSE="|| ( MIT GPL-2 )"
-
-	# mcs/tools/mono-win32-setup.nsi
-	# LICENSE="GPL-2"
-
-# samples
-# LICENSE="MIT"
