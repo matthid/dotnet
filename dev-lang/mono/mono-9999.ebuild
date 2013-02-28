@@ -1,8 +1,8 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2012 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/mono/mono-3.0.3.ebuild $
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/mono/mono-2.11.1.ebuild,v 1.1 2012/05/10 18:47:12 ali_bush Exp $
 
-EAPI="5"
+EAPI="4"
 
 inherit linux-info mono eutils flag-o-matic multilib go-mono pax-utils
 
@@ -13,8 +13,9 @@ LICENSE="MIT LGPL-2.1 GPL-2 BSD-4 NPL-1.1 Ms-PL GPL-2-with-linking-exception IDP
 SLOT="0"
 KEYWORDS=""
 
-IUSE="minimal pax_kernel xen doc"
+IUSE="minimal pax_kernel xen"
 
+#Bash requirement is for += operator
 COMMONDEPEND="!dev-util/monodoc
 	!minimal? ( >=dev-dotnet/libgdiplus-2.10 )
 	ia64? (	sys-libs/libunwind )"
@@ -24,7 +25,10 @@ RDEPEND="${COMMONDEPEND}
 DEPEND="${COMMONDEPEND}
 	sys-devel/bc
 	virtual/yacc
+	>=app-shells/bash-3.2
 	pax_kernel? ( sys-apps/paxctl )"
+
+MAKEOPTS="${MAKEOPTS} -j1"
 
 RESTRICT="test"
 
@@ -54,7 +58,12 @@ pkg_setup() {
 }
 
 src_prepare() {
+
+	#fix automake upstream crap see commit a14e9e5650d978bf21a57470d2a3edeb164407ea
+	cat "${S}/mono/mini/Makefile.am.in" > "${S}/mono/mini/Makefile.am" || die
+
 	go-mono_src_prepare
+
 	# we need to sed in the paxctl -mr in the runtime/mono-wrapper.in so it don't
 	# get killed in the build proces when MPROTEC is enable. #286280
 	# RANDMMAP kill the build proces to #347365
@@ -81,6 +90,9 @@ src_configure() {
 	# and, otherwise, problems like bug #340641 appear.
 	#
 	# sgen fails on ppc, bug #359515
+		
+	local myconf=""
+	use ppc && myconf="${myconf} --with-sgen=no"
 	go-mono_src_configure \
 		--enable-system-aot=yes \
 		--enable-static \
@@ -92,8 +104,7 @@ src_configure() {
 		--with-jit \
 		--disable-dtrace \
 		--with-profile4 \
-		--with-sgen=$(use ppc && printf "no" || printf "yes" ) \
-		$(use_with doc mcs-docs)
+		${myconf}
 }
 
 src_test() {
@@ -129,7 +140,7 @@ pkg_preinst() {
 	local symlink
 	local NUNIT_DIR="/usr/$(get_libdir)/mono/nunit"
 	local pv_atom
-	if  [[ "$(readlink "${EROOT}"/${NUNIT_DIR})" == *"mono-nunit"* ]]
+	if  [[ "$(readlink "${ROOT}"/${NUNIT_DIR})" == *"mono-nunit"* ]]
 	then
 		for pv_atom in 2.2{,-r1,-r2,-r3,-r4} '2.4_pre*' '2.4_rc*' 2.4
 		do
@@ -139,10 +150,10 @@ pkg_preinst() {
 				einfo "be advised that this is a known problem, which will now be fixed:"
 				ebegin "Found broken symlinks created by $(best_version dev-lang/mono), fixing"
 				for symlink in						\
-					"${EROOT}/${NUNIT_DIR}"				\
-					"${EROOT}/usr/$(get_libdir)/pkgconfig/nunit.pc"	\
-					"${EROOT}/usr/bin/nunit-console"			\
-					"${EROOT}/usr/bin/nunit-console2"
+					"${ROOT}/${NUNIT_DIR}"				\
+					"${ROOT}/usr/$(get_libdir)/pkgconfig/nunit.pc"	\
+					"${ROOT}/usr/bin/nunit-console"			\
+					"${ROOT}/usr/bin/nunit-console2"
 				do
 					if [[ -L "${symlink}" ]]
 					then
@@ -192,3 +203,67 @@ pkg_postinst() {
 	elog "	Mono.Data.SybaseClient"
 	elog "Also read: http://www.mono-project.com/Sybase"
 }
+
+# NOTICE: THE COPYRIGHT FILES IN THE TARBALL ARE UNCLEAR!
+# WHENEVER YOU THINK SOMETHING IS GPL-2+, IT'S ONLY GPL-2
+# UNLESS MIGUEL DE ICAZA HIMSELF SAYS OTHERWISE.
+
+# mono
+# The code we use is LGPL, but contributions must be made under the MIT/X11
+# license, so Novell can serve its paying customers. Exception is mono/man.
+# LICENSE="LGPL-2.1"
+
+	# mono/man
+	# LICENSE="MIT"
+
+# mcs/mcs
+# mcs/gmcs
+# LICENSE="GPL-2 MIT"
+
+# tests
+# LICENSE="MIT"
+
+# mcs/class
+# Except the listed exceptions:
+# LICENSE="MIT"
+
+	# mcs/class/ByteFX.Data
+	# mcs/class/Npgsql
+	# LICENSE="LGPL-2.1"
+
+	# mcs/class/FirebirdSql.Data.Firebird
+	# LICENSE="IDPL"
+
+	# mcs/class/ICSharpCode.SharpZipLib
+	# LICENSE="GPL-2-with-linking-exception"
+
+	# mcs/class/MicrosoftAjaxLibrary
+	# LICENSE="Ms-Pl"
+
+	# mcs/class/Microsoft.JScript/Microsoft.JScript/TokenStream.cs
+	# mcs/class/Microsoft.JScript/Microsoft.JScript/Token.cs
+	# mcs/class/Microsoft.JScript/Microsoft.JScript/Parser.cs
+	# mcs/class/Microsoft.JScript/Microsoft.JScript/Decompiler.cs
+	# LICENSE="|| ( NPL-1.1 GPL-2 )"
+
+# mcs/jay
+# LICENSE="BSD-4"
+
+# mcs/tools
+# Except the listed exceptions:
+# LICENSE="MIT"
+
+	# mcs/tools/mdoc/Mono.Documentation/monodocs2html.cs
+	# LICENSE="GPL-2"
+
+	# mcs/tools/sqlsharp/SqlSharpCli.cs
+	# LICENSE="GPL-2"
+
+	# mcs/tools/csharp/repl.cs
+	# LICENSE="|| ( MIT GPL-2 )"
+
+	# mcs/tools/mono-win32-setup.nsi
+	# LICENSE="GPL-2"
+
+# samples
+# LICENSE="MIT"
