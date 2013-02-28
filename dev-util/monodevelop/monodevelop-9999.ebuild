@@ -13,7 +13,7 @@ EGIT_REPO_URI="git://github.com/Cynede/monodevelop.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="subversion +git"
+IUSE=""
 
 RDEPEND=">=dev-lang/mono-3.0.1
 	>=dev-dotnet/gconf-sharp-2.24.0
@@ -31,7 +31,6 @@ RDEPEND=">=dev-lang/mono-3.0.1
 		www-client/firefox-bin
 		www-client/seamonkey
 		)
-	subversion? ( dev-vcs/subversion )
 	!<dev-util/monodevelop-boo-$(get_version_component_range 1-2)
 	!<dev-util/monodevelop-java-$(get_version_component_range 1-2)
 	!<dev-util/monodevelop-database-$(get_version_component_range 1-2)
@@ -47,13 +46,7 @@ DEPEND="${RDEPEND}
 MAKEOPTS="${MAKEOPTS} -j1"
 
 src_configure() {
-	econf \
-		--disable-update-mimedb \
-		--disable-update-desktopdb \
-		--enable-monoextensions \
-		--enable-gnomeplatform \
-		$(use_enable subversion) \
-		$(use_enable git)
+	./configure	|| die
 }
 
 pkg_preinst() {
