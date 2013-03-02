@@ -25,6 +25,9 @@ RDEPEND="${DEPEND}"
 
 src_install() {
 	insinto /usr/lib/mono/nuport/"${FRAMEWORK}"
+	doins src/bin/Release/FSharp.Core.dll
+	doins src/bin/Release/Heather.dll
+	doins src/bin/Release/NuGet.Core.dll
 	doins src/bin/Release/nuport.exe
 }
 
