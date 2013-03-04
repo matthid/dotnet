@@ -17,7 +17,7 @@ case ${EAPI:-0} in
   *) ;; #if [[ ${USE_DOTNET} ]]; then REQUIRED_USE="|| (${USE_DOTNET})"; fi;;
 esac
 
-inherit eutils
+inherit eutils versionator
 
 # SET default use flags according on DOTNET_TARGETS
 for x in ${USE_DOTNET}; do
@@ -44,14 +44,19 @@ mono_pkg_setup() {
 				FRAMEWORK="${F}";
 			fi
 		else	
-		    #TODO: BASH HACKER REQUEST
-			if [[ ${SHELL} == "/bin/zsh" ]]; then
-				if [[ ${FRAMEWORK} < ${F} ]]; then 
+		    local r
+			version_compare "${FRAMEWORK}" "${F}"
+			r=$?
+			case $r in
+				1)
 					FRAMEWORK="${F}"
-				fi
-			else
-				FRAMEWORK="${F}"
-			fi
+					;;
+				2|3)
+					;;
+				*)
+					die "versionator compare bug"
+					;;
+			esac
 		fi
 	done
 	if [[ -z ${FRAMEWORK} ]]; then
