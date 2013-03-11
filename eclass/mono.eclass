@@ -40,29 +40,17 @@ mono_pkg_setup() {
 			net20) if use net20; then F="2.0"; fi;;
 		esac
 		if [[ -z ${FRAMEWORK} ]]; then
-			if [[ ${F} ]]; then 
+			if [[ ${F} ]]; then
 				FRAMEWORK="${F}";
 			fi
-		else	
-		    local r
-			version_compare "${FRAMEWORK}" "${F}"
-			r=$?
-			case $r in
-				1)
-					FRAMEWORK="${F}"
-					;;
-				2|3)
-					;;
-				*)
-					die "versionator compare bug"
-					;;
-			esac
+		else
+			version_is_at_least "${F}" "${FRAMEWORK}" || FRAMEWORK="${F}"
 		fi
 	done
 	if [[ -z ${FRAMEWORK} ]]; then
 		FRAMEWORK="4.0"
 	fi
-	echo " *** USING .NET ${FRAMEWORK} FRAMEWORK *** "
+	einfo " -- USING .NET ${FRAMEWORK} FRAMEWORK -- "
 }
 
 # >=mono-0.92 versions using mcs -pkg:foo-sharp require shared memory, so we set the
