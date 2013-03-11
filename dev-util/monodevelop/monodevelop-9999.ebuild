@@ -43,8 +43,7 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 	x11-misc/shared-mime-info"
 
-MAKEOPTS="${MAKEOPTS} -j1"
-
+MAKEOPTS="${MAKEOPTS} -j1" #nowarn
 src_configure() {
 	./configure	|| die
 }

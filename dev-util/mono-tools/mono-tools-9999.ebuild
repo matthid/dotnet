@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/mono-tools/mono-tools-2.10.ebuild,v 1.7 2012/05/04 17:51:44 jdhore Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-util/mono-tools/mono-tools-9999.ebuild $
 
 EAPI="4"
 
@@ -27,9 +27,7 @@ DEPEND="${RDEPEND}
 
 PATCHES=( "${FILESDIR}/${PN}-2.8-html-renderer-fixes.patch" )
 
-#Fails parallel make.
-MAKEOPTS="${MAKEOPTS} -j1"
-
+MAKEOPTS="${MAKEOPTS} -j1" #nowarn
 pkg_setup() {
 	if ! use webkit && ! use gtkhtml
 	then

@@ -1,6 +1,6 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-util/mono-debugger/mono-debugger-2.10.ebuild,v 1.5 2012/04/18 10:22:31 pacho Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-util/mono-debugger/mono-debugger-9999.ebuild $
 
 EAPI=4
 
@@ -13,10 +13,9 @@ LICENSE="GPL-2 MIT"
 SLOT="0"
 KEYWORDS=""
 IUSE=""
-# bah, tests fail. Needs to be fixed ...
+
 RESTRICT="test"
 
-#Bundles jay
 # Binutils is needed for libbfd
 RDEPEND="!!=dev-lang/mono-2.2
 	sys-devel/binutils
@@ -33,9 +32,7 @@ src_prepare() {
 }
 
 src_configure() {
-	# Let's go for extra safety to avoid runtime errors, until
-	# upstream applies it.
-	append-ldflags -Wl,--no-undefined
+	append-ldflags -Wl,--no-undefined #nowarn
 
 	go-mono_src_configure \
 		--with-system-libbfd \
@@ -43,5 +40,5 @@ src_configure() {
 }
 
 src_compile() {
-	emake -j1
+	emake -j1 #nowarn
 }

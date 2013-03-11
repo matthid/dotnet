@@ -17,7 +17,7 @@ SLOT="0"
 KEYWORDS="x86 amd64"
 IUSE=""
 
-MAKEOPTS="-j1"
+MAKEOPTS="-j1" #nowarn
 DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
 

@@ -30,8 +30,7 @@ DEPEND="${COMMONDEPEND}
 	>=app-shells/bash-3.2
 	pax_kernel? ( sys-apps/paxctl )"
 
-MAKEOPTS="${MAKEOPTS} -j1"
-
+MAKEOPTS="${MAKEOPTS} -j1" #nowarn
 RESTRICT="test"
 
 QA_FLAGS_IGNORED="/usr/lib64/mono/4.5/mcs.exe.so \
@@ -95,7 +94,7 @@ src_configure() {
 	# and, otherwise, problems like bug #340641 appear.
 	#
 	# sgen fails on ppc, bug #359515
-		
+
 	local myconf=""
 	use ppc && myconf="${myconf} --with-sgen=no"
 	go-mono_src_configure \
