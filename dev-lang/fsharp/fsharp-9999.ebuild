@@ -20,9 +20,7 @@ KEYWORDS=""
 IUSE=""
 
 MAKEOPTS="-j1" #nowarn
-DEPEND="dev-lang/mono
-!=dev-lang/mono-3.0.5*
-!=dev-lang/mono-3.0.6*"
+DEPEND="|| ( >dev-lang/mono-3.0.6 <dev-lang/mono-3.0.5 )"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
