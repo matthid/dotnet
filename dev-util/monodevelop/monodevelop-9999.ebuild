@@ -8,7 +8,7 @@ inherit fdo-mime gnome2-utils mono versionator eutils git-2
 DESCRIPTION="Integrated Development Environment for .NET"
 HOMEPAGE="http://www.monodevelop.com/"
 
-EGIT_REPO_URI="git://github.com/Cynede/monodevelop.git"
+EGIT_REPO_URI="git://github.com/Heather/monodevelop.git"
 
 LICENSE="GPL-2"
 SLOT="0"
