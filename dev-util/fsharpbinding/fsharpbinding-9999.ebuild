@@ -6,11 +6,12 @@ EAPI=5
 
 USE_DOTNET="net40"
 
-inherit git-2 autotools mono eutils
+inherit git-2 elisp autotools mono eutils
 
-if use emacs; then
-	inherit elisp
-fi
+#Bad for metadata:
+#if use emacs; then
+#	inherit elisp
+#fi
 
 EGIT_REPO_URI="git://github.com/fsharp/fsharpbinding.git"
 
