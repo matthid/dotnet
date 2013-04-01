@@ -6,7 +6,7 @@ EAPI=5
 
 USE_DOTNET="net40"
 
-inherit git-2 autotools mono
+inherit git-2 autotools mono eutils
 
 EGIT_REPO_URI="git://github.com/fsharp/fsharpbinding.git"
 
@@ -33,7 +33,7 @@ src_configure() {
 	if use monodevelop; then
 	   cd "${S}/monodevelop"
 	   ./configure.sh
-	fi	
+	fi
 }
 src_compile() {
 	if use monodevelop; then
@@ -53,7 +53,7 @@ src_install() {
 	if use emacs; then
 	   eerror "emacs is currently not supported in this ebuild :/"
 	fi
- 
+
 	# They try to install in the user directory
 	#if use monodevelop; then
 	#   cd "${S}/monodevelop"
@@ -81,6 +81,5 @@ pkg_postinst() {
 	   ewarn "rm -r ~/.local/share/MonoDevelop-3.0/LocalInstall/Addins"
 	   ewarn "rm -r ~/.local/share/MonoDevelop-4.0/LocalInstall/Addins"
 	   ewarn "Note that this will remove all Addins of the current user."
-	   
 	fi
 }
