@@ -8,6 +8,10 @@ USE_DOTNET="net40"
 
 inherit git-2 autotools mono eutils
 
+if use emacs; then
+	inherit elisp
+fi
+
 EGIT_REPO_URI="git://github.com/fsharp/fsharpbinding.git"
 
 DESCRIPTION="The F# Compiler"
@@ -22,11 +26,32 @@ IUSE="-emacs +monodevelop"
 MAKEOPTS="-j1" #nowarn
 DEPEND="dev-lang/fsharp
 	monodevelop? ( dev-util/monodevelop )
-	emacs? ( app-editors/emacs )"
+	emacs? ( app-emacs/s app-emacs/dash app-emacs/auto-complete )"
 RDEPEND="${DEPEND}"
 
+pkg_setup() {
+	mono_pkg_setup
+	if use emacs; then
+		elisp_pkg_setup
+	fi
+}
+
+src_unpack() {
+	git-2_src_unpack
+	if use emacs; then
+		cd "${S}/emacs"
+		elisp_src_unpack
+	fi
+}
+
 src_prepare() {
-	epatch "${FILESDIR}/Makefile.patch"
+	if use monodevelop; then
+		epatch "${FILESDIR}/Makefile.patch"
+	fi
+	if use emacs; then
+		cd "${S}/emacs"
+		elisp_src_prepare
+	fi
 }
 
 src_configure() {
@@ -40,6 +65,10 @@ src_compile() {
 	   cd "${S}/monodevelop"
 	   emake
 	fi
+	if use emacs; then
+		cd "${S}/emacs"
+		elisp_src_compile
+	fi
 }
 src_install() {
 	if use monodevelop; then
@@ -51,35 +80,32 @@ src_install() {
 
 	fi
 	if use emacs; then
-	   eerror "emacs is currently not supported in this ebuild :/"
+		cd "${S}/emacs"
+		elisp_src_install
 	fi
-
 	# They try to install in the user directory
 	#if use monodevelop; then
 	#   cd "${S}/monodevelop"
 	#   emake install
 	#fi
-	#if use emacs; then
-	#   cd "${S}/emacs"
-	#   emake install
-	#fi
 }
 
 pkg_postinst() {
-	#if use emacs; then
-	#   ewarn "To install fsharpbindings in emacs add the following lines to your init.el and read https://github.com/fsharp/fsharpbinding/tree/master/emacs"	
-	#   ewarn "(add-to-list 'load-path \"~/.emacs.d/fsharp-mode/\")"
-	#   ewarn "(autoload 'fsharp-mode \"fsharp-mode\"     \"Major mode for editing F# code.\" t)"
-	#   ewarn "(add-to-list 'auto-mode-alist '(\"\\.fs[iylx]?$\" . fsharp-mode))"
-	#fi
+	if use emacs; then
+		elisp_pkg_postinst
+		ewarn "To install fsharpbindings in emacs add the following lines to your init.el and read https://github.com/fsharp/fsharpbinding/tree/master/emacs"	
+		ewarn "(add-to-list 'load-path \"~/.emacs.d/fsharp-mode/\")"
+		ewarn "(autoload 'fsharp-mode \"fsharp-mode\"     \"Major mode for editing F# code.\" t)"
+		ewarn "(add-to-list 'auto-mode-alist '(\"\\.fs[iylx]?$\" . fsharp-mode))"
+	fi
 	if use monodevelop; then
-	   ewarn "To install fsharpbinding to monodevelop for your current user execute"
-	   ewarn "mdtool setup install -y /usr/lib/monodevelop/Packs/Monodevelop.FSharpBinding_${PVR}.mpack"
-	   ewarn "Please make sure to manually deinstall all old fsharpbinding versions before using the above command"
-	   ewarn "If you still have problems use:"
-	   ewarn "rm -r ~/.config/MonoDevelop/addins"
-	   ewarn "rm -r ~/.local/share/MonoDevelop-3.0/LocalInstall/Addins"
-	   ewarn "rm -r ~/.local/share/MonoDevelop-4.0/LocalInstall/Addins"
-	   ewarn "Note that this will remove all Addins of the current user."
+		ewarn "To install fsharpbinding to monodevelop for your current user execute"
+		ewarn "mdtool setup install -y /usr/lib/monodevelop/Packs/Monodevelop.FSharpBinding_${PVR}.mpack"
+		ewarn "Please make sure to manually deinstall all old fsharpbinding versions before using the above command"
+		ewarn "If you still have problems use:"
+		ewarn "rm -r ~/.config/MonoDevelop/addins"
+		ewarn "rm -r ~/.local/share/MonoDevelop-3.0/LocalInstall/Addins"
+		ewarn "rm -r ~/.local/share/MonoDevelop-4.0/LocalInstall/Addins"
+		ewarn "Note that this will remove all Addins of the current user."
 	fi
 }
