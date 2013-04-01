@@ -6,9 +6,10 @@ EAPI=5
 
 USE_DOTNET="net40"
 
-inherit git-2 elisp autotools mono eutils
+inherit git-2 elisp-common autotools mono eutils
 
-#Bad for metadata:
+#Bad for metadata but needs to not install emacs for -emacs users
+#that's why I stupidly recode all the eclass stuff in ebuild
 #if use emacs; then
 #	inherit elisp
 #fi
@@ -27,13 +28,18 @@ IUSE="-emacs +monodevelop"
 MAKEOPTS="-j1" #nowarn
 DEPEND="dev-lang/fsharp
 	monodevelop? ( dev-util/monodevelop )
-	emacs? ( app-emacs/s app-emacs/dash app-emacs/auto-complete )"
+	emacs? ( >=virtual/emacs-${NEED_EMACS:-21} app-emacs/s app-emacs/dash app-emacs/auto-complete )"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
 	mono_pkg_setup
 	if use emacs; then
-		elisp_pkg_setup
+		elisp-need-emacs "${NEED_EMACS:-21}"
+		case $? in
+			0) ;;
+			1) die "Emacs version too low" ;;
+			*) die "Could not determine Emacs version" ;;
+		esac
 	fi
 }
 
@@ -41,7 +47,16 @@ src_unpack() {
 	git-2_src_unpack
 	if use emacs; then
 		cd "${S}/emacs"
-		elisp_src_unpack
+		if [[ -f ${P}.el ]]; then
+			# the "simple elisp" case with a single *.el file in WORKDIR
+			mv ${P}.el ${PN}.el || die
+			[[ -d ${S} ]] || S=${WORKDIR}
+		fi
+
+		case "${EAPI:-0}" in
+			0|1) [[ -d ${S} ]] && cd "${S}"
+				elisp_src_prepare ;;
+		esac
 	fi
 }
 
@@ -51,7 +66,9 @@ src_prepare() {
 	fi
 	if use emacs; then
 		cd "${S}/emacs"
-		elisp_src_prepare
+		if [[ -n ${ELISP_REMOVE} ]]; then
+			rm ${ELISP_REMOVE} || die
+		fi
 	fi
 }
 
@@ -68,7 +85,10 @@ src_compile() {
 	fi
 	if use emacs; then
 		cd "${S}/emacs"
-		elisp_src_compile
+		elisp-compile *.el
+		if [[ -n ${ELISP_TEXINFO} ]]; then
+			makeinfo ${ELISP_TEXINFO} || die
+		fi
 	fi
 }
 src_install() {
@@ -82,7 +102,21 @@ src_install() {
 	fi
 	if use emacs; then
 		cd "${S}/emacs"
-		elisp_src_install
+		elisp-install ${PN} *.el *.elc
+		if [[ -n ${SITEFILE} ]]; then
+			elisp-site-file-install "${FILESDIR}/${SITEFILE}"
+		fi
+		if [[ -n ${ELISP_TEXINFO} ]]; then
+			set -- ${ELISP_TEXINFO}
+			set -- ${@##*/}
+			doinfo ${@/%.*/.info*} || die
+		fi
+		if [[ -n ${DOCS} ]]; then
+			dodoc ${DOCS} || die
+		fi
+		if declare -f readme.gentoo_create_doc >/dev/null; then
+			readme.gentoo_create_doc
+		fi
 		
 		#AutoComplete:
 		xbuild "${S}/FSharp.AutoComplete/FSharp.AutoComplete.fsproj" /property:OutputPath="${D}/usr/share/emacs/${PN}/bin/"
@@ -97,7 +131,10 @@ src_install() {
 
 pkg_postinst() {
 	if use emacs; then
-		elisp_pkg_postinst
+		elisp-site-regen
+		if declare -f readme.gentoo_print_elog >/dev/null; then
+			readme.gentoo_print_elog
+		fi
 		ewarn "To install fsharpbindings in emacs add the following lines to your init.el and read https://github.com/fsharp/fsharpbinding/tree/master/emacs"	
 		ewarn "(add-to-list 'load-path \"~/.emacs.d/fsharp-mode/\")"
 		ewarn "(autoload 'fsharp-mode \"fsharp-mode\"     \"Major mode for editing F# code.\" t)"
