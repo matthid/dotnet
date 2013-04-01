@@ -21,8 +21,8 @@ IUSE="-emacs +monodevelop"
 
 MAKEOPTS="-j1" #nowarn
 DEPEND="dev-lang/fsharp
-	dev-util/monodevelop
-	"
+	monodevelop? ( dev-util/monodevelop )
+	emacs? ( app-editors/emacs )"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
