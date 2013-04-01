@@ -82,7 +82,11 @@ src_install() {
 	if use emacs; then
 		cd "${S}/emacs"
 		elisp_src_install
+		
+		#AutoComplete:
+		xbuild "${S}/FSharp.AutoComplete/FSharp.AutoComplete.fsproj" /property:OutputPath="${D}/usr/share/emacs/${PN}/bin/"
 	fi
+	
 	# They try to install in the user directory
 	#if use monodevelop; then
 	#   cd "${S}/monodevelop"
