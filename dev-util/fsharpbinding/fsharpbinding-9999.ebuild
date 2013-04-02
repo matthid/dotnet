@@ -8,12 +8,6 @@ USE_DOTNET="net40"
 
 inherit git-2 elisp-common autotools mono eutils
 
-#Bad for metadata but needs to not install emacs for -emacs users
-#that's why I stupidly recode all the eclass stuff in ebuild
-#if use emacs; then
-#	inherit elisp
-#fi
-
 EGIT_REPO_URI="git://github.com/fsharp/fsharpbinding.git"
 
 DESCRIPTION="The F# Compiler"
@@ -52,23 +46,12 @@ src_unpack() {
 			mv ${P}.el ${PN}.el || die
 			[[ -d ${S} ]] || S=${WORKDIR}
 		fi
-
-		case "${EAPI:-0}" in
-			0|1) [[ -d ${S} ]] && cd "${S}"
-				elisp_src_prepare ;;
-		esac
 	fi
 }
 
 src_prepare() {
 	if use monodevelop; then
 		epatch "${FILESDIR}/Makefile.patch"
-	fi
-	if use emacs; then
-		cd "${S}/emacs"
-		if [[ -n ${ELISP_REMOVE} ]]; then
-			rm ${ELISP_REMOVE} || die
-		fi
 	fi
 }
 
@@ -111,13 +94,6 @@ src_install() {
 			set -- ${@##*/}
 			doinfo ${@/%.*/.info*} || die
 		fi
-		if [[ -n ${DOCS} ]]; then
-			dodoc ${DOCS} || die
-		fi
-		if declare -f readme.gentoo_create_doc >/dev/null; then
-			readme.gentoo_create_doc
-		fi
-
 		#AutoComplete:
 		xbuild "${S}/FSharp.AutoComplete/FSharp.AutoComplete.fsproj" /property:OutputPath="${D}/usr/share/emacs/site-lisp/${PN}/bin/"
 	fi
@@ -136,7 +112,6 @@ pkg_postinst() {
 			readme.gentoo_print_elog
 		fi
 		ewarn "To install fsharpbindings in emacs add the following lines to your init.el and read https://github.com/fsharp/fsharpbinding/tree/master/emacs"
-		ewarn "(add-to-list 'load-path \"/usr/share/emacs/site-lisp/${PN}\")"
 		ewarn "(autoload 'fsharp-mode \"fsharp-mode\"     \"Major mode for editing F# code.\" t)"
 		ewarn "(add-to-list 'auto-mode-alist '(\"\\.fs[iylx]?$\" . fsharp-mode))"
 	fi
