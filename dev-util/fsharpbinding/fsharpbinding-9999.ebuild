@@ -117,11 +117,11 @@ src_install() {
 		if declare -f readme.gentoo_create_doc >/dev/null; then
 			readme.gentoo_create_doc
 		fi
-		
+
 		#AutoComplete:
 		xbuild "${S}/FSharp.AutoComplete/FSharp.AutoComplete.fsproj" /property:OutputPath="${D}/usr/share/emacs/${PN}/bin/"
 	fi
-	
+
 	# They try to install in the user directory
 	#if use monodevelop; then
 	#   cd "${S}/monodevelop"
@@ -135,7 +135,7 @@ pkg_postinst() {
 		if declare -f readme.gentoo_print_elog >/dev/null; then
 			readme.gentoo_print_elog
 		fi
-		ewarn "To install fsharpbindings in emacs add the following lines to your init.el and read https://github.com/fsharp/fsharpbinding/tree/master/emacs"	
+		ewarn "To install fsharpbindings in emacs add the following lines to your init.el and read https://github.com/fsharp/fsharpbinding/tree/master/emacs"
 		ewarn "(add-to-list 'load-path \"~/.emacs.d/fsharp-mode/\")"
 		ewarn "(autoload 'fsharp-mode \"fsharp-mode\"     \"Major mode for editing F# code.\" t)"
 		ewarn "(add-to-list 'auto-mode-alist '(\"\\.fs[iylx]?$\" . fsharp-mode))"
