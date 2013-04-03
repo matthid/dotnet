@@ -8,10 +8,10 @@ USE_DOTNET="net40 net45"
 
 inherit git-2 mono
 
-EGIT_REPO_URI="git://github.com/Heather/Heather.git"
+EGIT_REPO_URI="git://github.com/Heather/shelly.git"
 
 DESCRIPTION="F# Shell Scripting Library"
-HOMEPAGE="https://github.com/Heather/Heather"
+HOMEPAGE="https://github.com/Heather/shelly"
 SRC_URI=""
 
 LICENSE="GPL-2"
