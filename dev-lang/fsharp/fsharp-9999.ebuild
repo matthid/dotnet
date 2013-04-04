@@ -19,7 +19,7 @@ IUSE="+unicode"
 
 if use unicode; then
 	EGIT_REPO_URI="git://github.com/Heather/fsharp.git"
-	EGIT_MASTER="Heather"
+	EGIT_MASTER="heather"
 else
 	EGIT_REPO_URI="git://github.com/fsharp/fsharp.git"
 	EGIT_MASTER="master"
