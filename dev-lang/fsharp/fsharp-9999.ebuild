@@ -8,8 +8,6 @@ USE_DOTNET="net40"
 
 inherit git-2 autotools mono
 
-EGIT_REPO_URI="git://github.com/fsharp/fsharp.git"
-
 DESCRIPTION="The F# Compiler"
 HOMEPAGE="https://github.com/fsharp/fsharp"
 SRC_URI=""
@@ -17,7 +15,15 @@ SRC_URI=""
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
+IUSE="+unicode"
+
+if use unicode; then
+	EGIT_REPO_URI="git://github.com/Heather/fsharp.git"
+	EGIT_MASTER="Heather"
+else
+	EGIT_REPO_URI="git://github.com/fsharp/fsharp.git"
+	EGIT_MASTER="master"
+fi
 
 MAKEOPTS="-j1" #nowarn
 DEPEND="|| ( >dev-lang/mono-3.0.6 <dev-lang/mono-3.0.5 )"
