@@ -26,6 +26,7 @@ else
 	EGIT_MASTER="master"
 fi
 
+MAKEOPTS="-j1" #nowarn
 DEPEND=">dev-lang/mono-2.11.3"
 RDEPEND="${DEPEND}"
 
