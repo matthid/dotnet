@@ -5,9 +5,6 @@
 		<email>Heather@Cynede.net</email>
 	</maintainer>
 	<longdescription>
-	  Mono/.NET programming language with macros support
+	  Scheme on .NET
 	</longdescription>
-    <use>
-      <flag name='binary'>Using binary bootstrap</flag>
-    </use>
 </pkgmetadata>
