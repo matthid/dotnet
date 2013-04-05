@@ -13,13 +13,18 @@ HOMEPAGE="http://www.nemerle.org/"
 
 SRC_URI=""
 
-EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
-EGIT_MASTER="master"
-
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS=""
-IUSE="+binary"
+IUSE="+binary unixSupport"
+
+if use unixSupport; then
+	EGIT_REPO_URI="git://github.com/Heather/nemerle.git"
+	EGIT_MASTER="UnixSupport"
+else
+	EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
+	EGIT_MASTER="master"
+fi
 
 DEPEND=">dev-lang/mono-2.11.3"
 RDEPEND="${DEPEND}"
