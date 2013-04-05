@@ -21,7 +21,7 @@ IUSE="+binary -unixSupport Ashlyn"
 if use Ashlyn; then
 	ewarn "Ashlyn is very experimental branch"
 	ewarn "usual Nemerle code will definetly fail."
-	EGIT_REPO_URI="git://github.com/Heather/nemerle.git"
+	EGIT_REPO_URI="git://github.com/Heather/Ashlyn.git"
 	EGIT_MASTER="Ashlyn"
 else
 	if use unixSupport; then
