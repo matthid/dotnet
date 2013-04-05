@@ -9,5 +9,7 @@
 	</longdescription>
     <use>
       <flag name='binary'>Using binary bootstrap</flag>
+      <flag name='unixSupport'>Unix Support branch diesigned to fix mono bugs</flag>
+      <flag name='Ashlyn'>Eperimental branch by Heather</flag>
     </use>
 </pkgmetadata>

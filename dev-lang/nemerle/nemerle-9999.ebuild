@@ -16,14 +16,19 @@ SRC_URI=""
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS=""
-IUSE="+binary unixSupport"
+IUSE="+binary unixSupport Ashlyn"
 
-if use unixSupport; then
+if use ashlyn; then
 	EGIT_REPO_URI="git://github.com/Heather/nemerle.git"
-	EGIT_MASTER="UnixSupport"
+	EGIT_MASTER="Ashlyn"
 else
-	EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
-	EGIT_MASTER="master"
+	if use unixSupport; then
+		EGIT_REPO_URI="git://github.com/Heather/nemerle.git"
+		EGIT_MASTER="UnixSupport"
+	else
+		EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
+		EGIT_MASTER="master"
+	fi
 fi
 
 MAKEOPTS="-j1" #nowarn
