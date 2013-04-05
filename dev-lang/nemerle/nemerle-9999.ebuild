@@ -18,7 +18,9 @@ SLOT="0"
 KEYWORDS=""
 IUSE="+binary -unixSupport Ashlyn"
 
-if use ashlyn; then
+if use Ashlyn; then
+	ewarn "Ashlyn is very experimental branch"
+	ewarn "usual Nemerle code will definetly fail."
 	EGIT_REPO_URI="git://github.com/Heather/nemerle.git"
 	EGIT_MASTER="Ashlyn"
 else
