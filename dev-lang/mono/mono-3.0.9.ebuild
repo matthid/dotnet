@@ -55,6 +55,9 @@ pkg_setup() {
 }
 
 src_prepare() {
+	cat "${S}/mono/mini/Makefile.am.in" > "${S}/mono/mini/Makefile.am" || die
+	cat "${S}/mono/metadata/Makefile.am.in" > "${S}/mono/metadata/Makefile.am" || die
+
 	go-mono-2_src_prepare
 	# we need to sed in the paxctl -mr in the runtime/mono-wrapper.in so it don't
 	# get killed in the build proces when MPROTEC is enable. #286280
