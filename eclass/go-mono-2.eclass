@@ -45,6 +45,7 @@ then
 else
 	GO_MONO_P=${P}
 	SRC_URI="https://github.com/mono/${PN}/archive/${P}.tar.gz"
+	S="${WORKDIR}/${PN}-${P}"
 fi
 
 NO_MONO_DEPEND=( "dev-lang/mono" "dev-dotnet/libgdiplus" "dev-dotnet/gluezilla" )
@@ -81,13 +82,8 @@ go-mono-2_src_unpack() {
 # @FUNCTION: go-mono-2_src_prepare
 # @DESCRIPTION: Runs autopatch from base.eclass, if PATCHES is set.
 go-mono-2_src_prepare() {
-	if [[ "${PV%.9999}" != "${PV}" ||  "${PV}" == "9999" ]]
-	then
-		base_src_prepare
-		[[ "$EAUTOBOOTSTRAP" != "no" ]] && eautoreconf
-	else
-		base_src_prepare
-	fi
+	base_src_prepare
+	[[ "$EAUTOBOOTSTRAP" != "no" ]] && eautoreconf
 }
 
 # @FUNCTION: go-mono-2_src_configure
