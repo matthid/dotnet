@@ -55,7 +55,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	go-mono_src_prepare
+	go-mono-2_src_prepare
 	# we need to sed in the paxctl -mr in the runtime/mono-wrapper.in so it don't
 	# get killed in the build proces when MPROTEC is enable. #286280
 	# RANDMMAP kill the build proces to #347365
@@ -82,7 +82,7 @@ src_configure() {
 	# and, otherwise, problems like bug #340641 appear.
 	#
 	# sgen fails on ppc, bug #359515
-	go-mono_src_configure \
+	go-mono-2_src_configure \
 		--enable-system-aot=yes \
 		--enable-static \
 		--disable-quiet-build \
@@ -110,7 +110,7 @@ src_test() {
 }
 
 src_install() {
-	go-mono_src_install
+	go-mono-2_src_install
 
 	# Remove files not respecting LDFLAGS and that we are not supposed to provide, see Fedora
 	# mono.spec and http://www.mail-archive.com/mono-devel-list@lists.ximian.com/msg24870.html
