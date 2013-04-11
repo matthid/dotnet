@@ -66,7 +66,7 @@ DEPEND="${DEPEND}
 	virtual/pkgconfig
 	userland_GNU? ( >=sys-apps/findutils-4.4.0 )"
 
-# @FUNCTION: go-mono_src_unpack
+# @FUNCTION: go-mono-2_src_unpack
 # @DESCRIPTION: Runs default()
 go-mono-2_src_unpack() {
 	if [[ "${PV%.9999}" != "${PV}" ||  "${PV}" == "9999" ]]
@@ -78,7 +78,7 @@ go-mono-2_src_unpack() {
 	fi
 }
 
-# @FUNCTION: go-mono_src_prepare
+# @FUNCTION: go-mono-2_src_prepare
 # @DESCRIPTION: Runs autopatch from base.eclass, if PATCHES is set.
 go-mono-2_src_prepare() {
 	if [[ "${PV%.9999}" != "${PV}" ||  "${PV}" == "9999" ]]
@@ -90,7 +90,7 @@ go-mono-2_src_prepare() {
 	fi
 }
 
-# @FUNCTION: go-mono_src_configure
+# @FUNCTION: go-mono-2_src_configure
 # @DESCRIPTION:
 # Runs econf, disabling static libraries and dependency-tracking.
 go-mono-2_src_configure() {
