@@ -4,7 +4,7 @@
 
 # @ECLASS: go-mono.eclass
 # @MAINTAINERS:
-# heather@cynede.net, dotnet@gentoo.org
+# heather@cynede.net
 # @BLURB: Common functionality for go-mono.org apps
 # @DESCRIPTION:
 # Common functionality needed by all go-mono.org apps.
@@ -19,17 +19,7 @@ ESVN_STORE_DIR="${PORTAGE_ACTUAL_DISTDIR:-${DISTDIR}}/svn-src/mono"
 
 GO_MONO_SUB_BRANCH=${GO_MONO_SUB_BRANCH}
 
-if [[ "${PV%_rc*}" != "${PV}" ]]
-then
-	GO_MONO_P="${P%_rc*}"
-	SRC_URI="${PRE_URI}/${PN}/${GO_MONO_P}.tar.bz2 -> ${P}.tar.bz2"
-	S="${WORKDIR}/${GO_MONO_P}"
-elif [[ "${PV%_pre*}" != "${PV}" ]]
-then
-	GO_MONO_P="${P%_pre*}"
-	SRC_URI="${PRE_URI}/${PN}/${GO_MONO_P}.tar.bz2 -> ${P}.tar.bz2"
-	S="${WORKDIR}/${GO_MONO_P}"
-elif [[ "${PV}" == "9999" ]]
+if [[ "${PV}" == "9999" ]]
 then
 	GO_MONO_P=${P}
 	EGIT_REPO_URI="http://github.com/mono/${GIT_PN}.git"
@@ -42,8 +32,10 @@ then
 	SRC_URI=""
 else
 	GO_MONO_P=${P}
-	SRC_URI="https://github.com/mono/${PN}/archive/${P}.tar.gz"
-	S="${WORKDIR}/${PN}-${P}"
+	EGIT_REPO_URI="http://github.com/mono/${GIT_PN}.git"
+	EGIT_BRANCH="master"
+	EGIT_TAG="mono-${PN}"
+	SRC_URI="" #S="${WORKDIR}/${PN}-${P}"
 fi
 
 NO_MONO_DEPEND=( "dev-lang/mono" "dev-dotnet/libgdiplus" "dev-dotnet/gluezilla" )
@@ -68,13 +60,8 @@ DEPEND="${DEPEND}
 # @FUNCTION: go-mono-2_src_unpack
 # @DESCRIPTION: Runs default()
 go-mono-2_src_unpack() {
-	if [[ "${PV%.9999}" != "${PV}" ||  "${PV}" == "9999" ]]
-	then
-		default
-		git-2_src_unpack
-	else
-		default
-	fi
+	default
+	git-2_src_unpack
 }
 
 # @FUNCTION: go-mono-2_src_prepare
