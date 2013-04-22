@@ -7,8 +7,15 @@ USE_DOTNET="net40"
 
 inherit git-2 mono
 
-#USE OWN FORK (YES IT'S UNOFFICIAL STUFF YET)
-EGIT_REPO_URI="git://github.com/Cynede/FAKE.git"
+#-> Official repo
+#EGIT_REPO_URI="git://github.com/fsharp/FAKE.git"
+
+#-> Own fork
+#EGIT_REPO_URI="git://github.com/Cynede/FAKE.git"
+
+#-> Mono 3 fixes
+EGIT_REPO_URI="git://github.com/intellifactory/FAKE.git"
+
 EGIT_MASTER="develop"
 
 DESCRIPTION="FAKE - F# Make"
@@ -25,7 +32,7 @@ dev-lang/fsharp"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	./mono_build.sh
+	./build.sh
 }
 
 src_install() {
