@@ -16,7 +16,7 @@ SRC_URI=""
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS=""
-IUSE="+binary -unixSupport Ashlyn"
+IUSE="+binary -Ashlyn"
 
 if use Ashlyn; then
 	ewarn "Ashlyn is very experimental branch"
@@ -24,13 +24,8 @@ if use Ashlyn; then
 	EGIT_REPO_URI="git://github.com/Heather/Nemerle.git"
 	EGIT_MASTER="Ashlyn"
 else
-	if use unixSupport; then
-		EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
-		EGIT_MASTER="UnixSupport"
-	else
-		EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
-		EGIT_MASTER="master"
-	fi
+	EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
+	EGIT_MASTER="master"
 fi
 
 MAKEOPTS="-j1" #nowarn
