@@ -33,6 +33,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	echo "mono /usr/lib/mono/FAKE/${FRAMEWORK}/FAKE.exe \"$@\"" > /usr/bin/fake
+	echo "mono /usr/lib/mono/FAKE/${FRAMEWORK}/FAKE.exe \"\$@\"" > /usr/bin/fake
 	chmod 777 /usr/bin/fake
 }

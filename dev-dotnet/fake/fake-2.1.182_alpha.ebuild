@@ -34,6 +34,6 @@ pkg_postinst() {
 	#Weird Solution to find NuGet.Core.dll :
 	ln -s "/usr/lib/mono/NuGet/4.5/NuGet.Core.dll" "/usr/lib/mono/FAKE/${FRAMEWORK}/NuGet.Core.dll"
 	#Exec :
-	echo "mono /usr/lib/mono/FAKE/${FRAMEWORK}/FAKE.exe \"$@\"" > /usr/bin/fake
+	echo "mono /usr/lib/mono/FAKE/${FRAMEWORK}/FAKE.exe \"\$@\"" > /usr/bin/fake
 	chmod 777 /usr/bin/fake
 }
