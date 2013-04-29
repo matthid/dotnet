@@ -11,7 +11,11 @@ HOMEPAGE="http://www.mono-project.com/Main_Page"
 
 LICENSE="MIT LGPL-2.1 GPL-2 BSD-4 NPL-1.1 Ms-PL GPL-2-with-linking-exception IDPL"
 SLOT="0"
-KEYWORDS="amd64 x86 ~amd64-linux ~ppc"
+KEYWORDS="" 	# Mask by keyword due something weird with makefiles here.
+		# git tag version of the same version works fine
+		# original keywords: amd64 x86 ~amd64-linux ~ppc
+		#
+		#				Heather.
 
 IUSE="minimal pax_kernel xen doc"
 
