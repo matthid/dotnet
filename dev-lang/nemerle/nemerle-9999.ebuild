@@ -16,13 +16,13 @@ SRC_URI=""
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS=""
-IUSE="+binary -Ashlyn"
+IUSE="+binary -indent"
 
 if use Ashlyn; then
-	ewarn "Ashlyn is very experimental branch"
+	ewarn "indent is very experimental branch"
 	ewarn "usual Nemerle code will definetly fail."
 	EGIT_REPO_URI="git://github.com/Heather/Nemerle.git"
-	EGIT_MASTER="Ashlyn"
+	EGIT_MASTER="indent"
 else
 	EGIT_REPO_URI="git://github.com/rsdn/nemerle.git"
 	EGIT_MASTER="master"
