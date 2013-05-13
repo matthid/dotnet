@@ -18,7 +18,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE="+binary -indent"
 
-if use Ashlyn; then
+if use indent; then
 	ewarn "indent is very experimental branch"
 	ewarn "usual Nemerle code will definetly fail."
 	EGIT_REPO_URI="git://github.com/Heather/Nemerle.git"
