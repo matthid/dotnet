@@ -11,7 +11,15 @@ HOMEPAGE="http://www.mono-project.com/Main_Page"
 
 LICENSE="MIT LGPL-2.1 GPL-2 BSD-4 NPL-1.1 Ms-PL GPL-2-with-linking-exception IDPL"
 SLOT="0"
-KEYWORDS=""
+
+KEYWORDS="~x86 ~and64"
+# they removed working tag 3.10 , so I force you to build master now
+# because:
+#
+# <directhex> Heather, 3.0.10 tarballs are broken due to a bug which is fixed in master
+# <directhex> also 3.0.7 and 3.0.8 and 3.0.9
+#
+# but 3.0.7 works for me so I mark it stable
 
 IUSE="minimal pax_kernel xen"
 
