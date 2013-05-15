@@ -4,18 +4,14 @@
 
 EAPI="5"
 
-inherit linux-info mono eutils flag-o-matic multilib go-mono pax-utils
+inherit linux-info mono eutils flag-o-matic multilib go-mono-2 pax-utils
 
 DESCRIPTION="Mono runtime and class libraries, a C# compiler/interpreter"
 HOMEPAGE="http://www.mono-project.com/Main_Page"
 
 LICENSE="MIT LGPL-2.1 GPL-2 BSD-4 NPL-1.1 Ms-PL GPL-2-with-linking-exception IDPL"
 SLOT="0"
-KEYWORDS="" 	# Mask by keyword due something weird with makefiles here.
-		# git tag version of the same version works fine
-		# original keywords: amd64 x86 ~amd64-linux ~ppc
-		#
-		#				Heather.
+KEYWORDS="~amd64 ~x86 ~amd64-linux ~ppc"
 
 IUSE="minimal pax_kernel xen doc"
 
@@ -59,7 +55,10 @@ pkg_setup() {
 }
 
 src_prepare() {
-	go-mono_src_prepare
+	cat "${S}/mono/mini/Makefile.am.in" > "${S}/mono/mini/Makefile.am" || die
+	cat "${S}/mono/metadata/Makefile.am.in" > "${S}/mono/metadata/Makefile.am" || die
+
+	go-mono-2_src_prepare
 	# we need to sed in the paxctl -mr in the runtime/mono-wrapper.in so it don't
 	# get killed in the build proces when MPROTEC is enable. #286280
 	# RANDMMAP kill the build proces to #347365
@@ -86,7 +85,7 @@ src_configure() {
 	# and, otherwise, problems like bug #340641 appear.
 	#
 	# sgen fails on ppc, bug #359515
-	go-mono_src_configure \
+	go-mono-2_src_configure \
 		--enable-system-aot=yes \
 		--enable-static \
 		--disable-quiet-build \
@@ -114,7 +113,7 @@ src_test() {
 }
 
 src_install() {
-	go-mono_src_install
+	go-mono-2_src_install
 
 	# Remove files not respecting LDFLAGS and that we are not supposed to provide, see Fedora
 	# mono.spec and http://www.mail-archive.com/mono-devel-list@lists.ximian.com/msg24870.html
