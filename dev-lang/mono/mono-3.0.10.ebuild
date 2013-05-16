@@ -1,23 +1,22 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/mono/mono-9999.ebuild $
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/mono/mono-3.0.10.ebuild $
 
 EAPI="5"
 
-inherit linux-info mono eutils flag-o-matic multilib go-mono pax-utils
+inherit linux-info mono eutils flag-o-matic multilib go-mono-2 pax-utils
 
 DESCRIPTION="Mono runtime and class libraries, a C# compiler/interpreter"
 HOMEPAGE="http://www.mono-project.com/Main_Page"
 
 LICENSE="MIT LGPL-2.1 GPL-2 BSD-4 NPL-1.1 Ms-PL GPL-2-with-linking-exception IDPL"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86 ~amd64-linux ~ppc"
 
-IUSE="minimal pax_kernel xen"
+IUSE="minimal pax_kernel xen doc"
 
-#Bash requirement is for += operator
 COMMONDEPEND="!dev-util/monodoc
-	!minimal? ( =dev-dotnet/libgdiplus-9999 )
+	!minimal? ( >=dev-dotnet/libgdiplus-2.10 )
 	ia64? (	sys-libs/libunwind )"
 RDEPEND="${COMMONDEPEND}
 	|| ( www-client/links www-client/lynx )"
@@ -25,7 +24,6 @@ RDEPEND="${COMMONDEPEND}
 DEPEND="${COMMONDEPEND}
 	sys-devel/bc
 	virtual/yacc
-	>=app-shells/bash-3.2
 	pax_kernel? ( sys-apps/paxctl )"
 
 MAKEOPTS="${MAKEOPTS} -j1" #nowarn
@@ -60,7 +58,7 @@ src_prepare() {
 	cat "${S}/mono/mini/Makefile.am.in" > "${S}/mono/mini/Makefile.am" || die
 	cat "${S}/mono/metadata/Makefile.am.in" > "${S}/mono/metadata/Makefile.am" || die
 
-	go-mono_src_prepare
+	go-mono-2_src_prepare
 	# we need to sed in the paxctl -mr in the runtime/mono-wrapper.in so it don't
 	# get killed in the build proces when MPROTEC is enable. #286280
 	# RANDMMAP kill the build proces to #347365
@@ -87,10 +85,7 @@ src_configure() {
 	# and, otherwise, problems like bug #340641 appear.
 	#
 	# sgen fails on ppc, bug #359515
-
-	local myconf=""
-	use ppc && myconf="${myconf} --with-sgen=no"
-	go-mono_src_configure \
+	go-mono-2_src_configure \
 		--enable-system-aot=yes \
 		--enable-static \
 		--disable-quiet-build \
@@ -101,7 +96,8 @@ src_configure() {
 		--with-jit \
 		--disable-dtrace \
 		--with-profile4 \
-		${myconf}
+		--with-sgen=$(use ppc && printf "no" || printf "yes" ) \
+		$(use_with doc mcs-docs)
 }
 
 src_test() {
@@ -117,7 +113,7 @@ src_test() {
 }
 
 src_install() {
-	go-mono_src_install
+	go-mono-2_src_install
 
 	# Remove files not respecting LDFLAGS and that we are not supposed to provide, see Fedora
 	# mono.spec and http://www.mail-archive.com/mono-devel-list@lists.ximian.com/msg24870.html
@@ -137,7 +133,7 @@ pkg_preinst() {
 	local symlink
 	local NUNIT_DIR="/usr/$(get_libdir)/mono/nunit"
 	local pv_atom
-	if  [[ "$(readlink "${ROOT}"/${NUNIT_DIR})" == *"mono-nunit"* ]]
+	if  [[ "$(readlink "${EROOT}"/${NUNIT_DIR})" == *"mono-nunit"* ]]
 	then
 		for pv_atom in 2.2{,-r1,-r2,-r3,-r4} '2.4_pre*' '2.4_rc*' 2.4
 		do
@@ -147,10 +143,10 @@ pkg_preinst() {
 				einfo "be advised that this is a known problem, which will now be fixed:"
 				ebegin "Found broken symlinks created by $(best_version dev-lang/mono), fixing"
 				for symlink in						\
-					"${ROOT}/${NUNIT_DIR}"				\
-					"${ROOT}/usr/$(get_libdir)/pkgconfig/nunit.pc"	\
-					"${ROOT}/usr/bin/nunit-console"			\
-					"${ROOT}/usr/bin/nunit-console2"
+					"${EROOT}/${NUNIT_DIR}"				\
+					"${EROOT}/usr/$(get_libdir)/pkgconfig/nunit.pc"	\
+					"${EROOT}/usr/bin/nunit-console"			\
+					"${EROOT}/usr/bin/nunit-console2"
 				do
 					if [[ -L "${symlink}" ]]
 					then
