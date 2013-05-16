@@ -15,7 +15,7 @@ SRC_URI=""
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86" #unmask due mono-9999 unmask
 IUSE="cairo"
 
 RDEPEND=">=dev-libs/glib-2.16
