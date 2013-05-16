@@ -113,6 +113,10 @@ src_test() {
 }
 
 src_install() {
+	git revert 38348361dadd5d9e8a1721ecd3ea31b01952d1e7
+	#
+	#				(c) Heather
+	
 	go-mono-2_src_install
 
 	# Remove files not respecting LDFLAGS and that we are not supposed to provide, see Fedora
