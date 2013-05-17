@@ -1,6 +1,6 @@
 # Copyright 1999-2013 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-lang/mono/mono-3.0.11.ebuild $
+# $Header: /var/cvsroot/gentoo-x86/dev-lang/mono/mono-3.0.10.ebuild $
 
 EAPI="5"
 
@@ -113,6 +113,10 @@ src_test() {
 }
 
 src_install() {
+	git revert 38348361dadd5d9e8a1721ecd3ea31b01952d1e7
+	#
+	#				(c) Heather
+	
 	go-mono-2_src_install
 
 	# Remove files not respecting LDFLAGS and that we are not supposed to provide, see Fedora
