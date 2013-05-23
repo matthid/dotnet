@@ -17,24 +17,16 @@ SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
-IUSE="fake"
+IUSE=""
 
 DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
 
 src_compile() {
-	if use fake; then
-		if [[ -f /usr/lib/mono/Heather/"${FRAMEWORK}"/Heather.dll ]]; then
-			fake
-		else
-			xbuild src/Heather.fsproj /p:Configuration=Release
-		fi
-	else
-		xbuild src/Heather.fsproj /p:Configuration=Release
-	fi
+	xbuild src/shelly.fsproj /p:Configuration=Release
 }
 
 src_install() {
-	insinto /usr/lib/mono/Heather/"${FRAMEWORK}"
-	doins src/bin/Release/Heather.dll
+	insinto /usr/lib/mono/shelly/"${FRAMEWORK}"
+	doins src/bin/Release/shelly.dll
 }
