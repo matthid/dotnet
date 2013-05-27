@@ -32,7 +32,6 @@ DEPEND="${COMMONDEPEND}
 	pax_kernel? ( sys-apps/paxctl )
 "
 
-MAKEOPTS="${MAKEOPTS} -j1" #nowarn
 RESTRICT="test"
 
 pkg_pretend() {
