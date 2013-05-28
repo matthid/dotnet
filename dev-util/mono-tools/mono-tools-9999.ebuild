@@ -16,21 +16,17 @@ SLOT="0"
 KEYWORDS=""
 IUSE="+webkit gtkhtml"
 
-RDEPEND="=virtual/monodoc-${GO_MONO_REL_PV}*
+RDEPEND="virtual/monodoc
 	>=dev-dotnet/gtk-sharp-2.12.6:2
 	>=dev-dotnet/glade-sharp-2.12.6:2
 	>=dev-dotnet/gconf-sharp-2:2
 	gtkhtml? ( >=dev-dotnet/gtkhtml-sharp-2.24.0:2 )
 	webkit? ( >=dev-dotnet/webkit-sharp-0.2-r1 )"
-
 DEPEND="${RDEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig"
-
 PATCHES=( "${FILESDIR}/${PN}-2.8-html-renderer-fixes.patch" )
-
 MAKEOPTS="${MAKEOPTS} -j1" #nowarn
-
 pkg_setup() {
 	if ! use webkit && ! use gtkhtml
 	then
