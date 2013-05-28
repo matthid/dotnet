@@ -2,12 +2,14 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/dev-util/mono-tools/mono-tools-9999.ebuild $
 
-EAPI="4"
+EAPI=5
 
-inherit go-mono mono autotools
+inherit base mono autotools git-2
 
 DESCRIPTION="Set of useful Mono related utilities"
 HOMEPAGE="http://www.mono-project.com/"
+
+EGIT_REPO_URI="git://github.com/mono/${PN}.git"
 
 LICENSE="GPL-2 MIT"
 SLOT="0"
@@ -28,6 +30,7 @@ DEPEND="${RDEPEND}
 PATCHES=( "${FILESDIR}/${PN}-2.8-html-renderer-fixes.patch" )
 
 MAKEOPTS="${MAKEOPTS} -j1" #nowarn
+
 pkg_setup() {
 	if ! use webkit && ! use gtkhtml
 	then
@@ -36,7 +39,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	go-mono_src_prepare
+	base_src_prepare
 
 	# Stop getting ACLOCAL_FLAGS command not found problem like bug #298813
 	sed -i -e '/ACLOCAL_FLAGS/d' Makefile.am || die
@@ -49,5 +52,5 @@ src_configure() {
 		--disable-gecko \
 		$(use_enable gtkhtml) \
 		$(use_enable webkit) \
-		--disable-monowebbrowser
+		--disable-monowebbrowser || die
 }
