@@ -32,8 +32,6 @@ DEPEND="${COMMONDEPEND}
 	pax_kernel? ( sys-apps/paxctl )
 "
 
-RESTRICT="test"
-
 pkg_pretend() {
 	# If CONFIG_SYSVIPC is not set in your kernel .config, mono will hang while compiling.
 	# See http://bugs.gentoo.org/261869 for more info."
@@ -101,6 +99,10 @@ src_make() {
 	# Doesn't require previous mono to be installed
 	emake get-monolite-latest
 	emake EXTERNAL_MCS=${PWD}/mcs/class/lib/monolite/gmcs.exe "$@" || die "emake failed"
+}
+
+src_test() {
+	emake check || die "tests fails"
 }
 
 src_install() {
