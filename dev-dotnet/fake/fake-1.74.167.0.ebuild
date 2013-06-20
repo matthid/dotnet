@@ -8,7 +8,7 @@ EAPI=5
 
 USE_DOTNET="net40"
 
-inherit nuget mono
+inherit nuget dotnet
 
 DESCRIPTION="FAKE - F# Make"
 HOMEPAGE="http://nuget.org/packages/FAKE"

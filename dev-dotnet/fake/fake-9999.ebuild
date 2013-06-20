@@ -5,7 +5,7 @@
 EAPI=5
 USE_DOTNET="net40"
 
-inherit git-2 mono
+inherit git-2 dotnet
 
 #-> Official repo
 #EGIT_REPO_URI="git://github.com/fsharp/FAKE.git"

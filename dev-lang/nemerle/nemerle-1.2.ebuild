@@ -6,7 +6,7 @@ EAPI="5"
 
 USE_DOTNET="net35 net40 net45"
 
-inherit mono multilib
+inherit dotnet multilib
 
 DESCRIPTION="A hybrid programming language for .NET / Mono platforms"
 HOMEPAGE="http://www.nemerle.org/"
