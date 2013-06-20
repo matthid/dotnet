@@ -7,7 +7,7 @@
 # @BLURB: Common functionality for nuget apps
 # @DESCRIPTION: Common functionality needed by fake build system.
 
-inherit mono
+inherit dotnet
 
 if [[ $PN == *_* ]]
 then
