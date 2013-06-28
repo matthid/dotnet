@@ -55,7 +55,10 @@ src_prepare() {
 	# RANDMMAP kill the build proces to #347365
 	if use pax_kernel ; then
 		ewarn "We are disabling MPROTECT on the mono binary."
-		sed '/exec/ i\paxctl-ng -mr "$r/@mono_runtime@"' -i "${S}"/runtime/mono-wrapper.in
+		
+		# issue 9 : https://github.com/Heather/gentoo-dotnet/issues/9
+		#sed '/exec/ i\paxctl-ng -mr "$r/@mono_runtime@"' -i "${S}"/runtime/mono-wrapper.in
+		sed '/exec "/ i\paxctl-ng -mr "$r/@mono_runtime@"' -i "${S}"/runtime/mono-wrapper.in
 	fi
 
 	# mono build system can fail otherwise
