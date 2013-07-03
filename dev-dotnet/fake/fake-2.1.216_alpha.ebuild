@@ -28,10 +28,10 @@ RDEPEND="${DEPEND}"
 src_unpack() {
 	if use nuget ; then
 		echo "using nuget"
-		nuget_src_unpack
+		nuget_src_unpack;
 	else
 		ewarn "!!! Trying git tag, it's not safe !!!"
-		git-2_src_unpack
+		git-2_src_unpack;
 	fi
 }
 
@@ -59,6 +59,7 @@ src_install() {
 
 pkg_postinst() {
 	#Weird Solution to find NuGet.Core.dll :
+	rm -f "/usr/lib/mono/FAKE/${FRAMEWORK}/NuGet.Core.dll"
 	ln -s "/usr/lib/mono/NuGet/4.5/NuGet.Core.dll" "/usr/lib/mono/FAKE/${FRAMEWORK}/NuGet.Core.dll"
 	#Exec :
 	echo "mono /usr/lib/mono/FAKE/${FRAMEWORK}/FAKE.exe \"\$@\"" > /usr/bin/fake

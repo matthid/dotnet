@@ -36,8 +36,4 @@ nuget_src_configure() { :; }
 # @DESCRIPTION: Runs nothing.
 nuget_src_compile() { :; }
 
-# @FUNCTION: nuget_src_install
-# @DESCRIPTION: Runs nothing.
-nuget_src_install () { :; }
-
-EXPORT_FUNCTIONS src_unpack src_configure src_compile src_install
+EXPORT_FUNCTIONS src_unpack src_configure src_compile
