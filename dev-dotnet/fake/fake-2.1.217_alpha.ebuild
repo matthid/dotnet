@@ -39,7 +39,12 @@ src_prepare() {
 	if use nuget ; then
 		echo "installation is done via nuget"
 	else
-		./build.sh
+		#fake is searching for libraries in source folder
+		ln -s tools/FAKE/tools/Newtonsoft.Json.dll "${S}"/Newtonsoft.Json.dll
+		ln -s tools/FAKE/tools/NuGet.Core.dll "${S}"/NuGet.Core.dll
+		ln -s tools/FAKE/tools/Fake.SQL.dll "${S}"/Fake.SQL.dll
+	
+		sh "${S}/build.sh"
 	fi
 }
 
@@ -51,16 +56,17 @@ src_install() {
 		doins FAKE."${NPV}"/tools/FakeLib.dll || die
 		doins FAKE."${NPV}"/tools/Newtonsoft.Json.dll
 		doins FAKE."${NPV}"/tools/Fake.SQL.dll
+		doins FAKE."${NPV}"/tools/NuGet.Core.dll
 	else
 		doins build/FAKE.exe || die
 		doins build/FakeLib.dll || die
+		doins tools/FAKE/tools/Newtonsoft.Json.dll
+		doins tools/FAKE/tools/Fake.SQL.dll
+		doins tools/FAKE/tools/NuGet.Core.dll
 	fi
 }
 
 pkg_postinst() {
-	#Weird Solution to find NuGet.Core.dll :
-	rm -f "/usr/lib/mono/FAKE/${FRAMEWORK}/NuGet.Core.dll"
-	ln -s "/usr/lib/mono/NuGet/4.5/NuGet.Core.dll" "/usr/lib/mono/FAKE/${FRAMEWORK}/NuGet.Core.dll"
 	#Exec :
 	echo "mono /usr/lib/mono/FAKE/${FRAMEWORK}/FAKE.exe \"\$@\"" > /usr/bin/fake
 	chmod 777 /usr/bin/fake
