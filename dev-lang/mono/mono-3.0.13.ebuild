@@ -10,8 +10,7 @@ inherit linux-info mono-env flag-o-matic pax-utils autotools-utils git-2
 DESCRIPTION="Mono runtime and class libraries, a C# compiler/interpreter"
 HOMEPAGE="http://www.mono-project.com/Main_Page"
 
-EGIT_REPO_URI="git://github.com/Heather/${PN}.git" # originally mono
-					 # point Heather fork for posix fix
+EGIT_REPO_URI="git://github.com/mono/${PN}.git"
 EGIT_HAS_SUBMODULES="true"
 EGIT_TAG="mono-${PN}"
 
