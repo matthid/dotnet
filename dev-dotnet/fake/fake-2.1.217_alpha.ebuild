@@ -11,7 +11,7 @@ inherit nuget dotnet
 DESCRIPTION="FAKE - F# Make"
 HOMEPAGE="http://nuget.org/packages/FAKE"
 
-SRC_URI="https://github.com/fsharp/FAKE/releases/${NPV}.tar.gz"
+SRC_URI="https://github.com/fsharp/FAKE/archive/${NPV}.tar.gz"
 
 LICENSE="MS-PL"
 SLOT="0"
@@ -39,7 +39,6 @@ src_prepare() {
 		ln -s tools/FAKE/tools/Newtonsoft.Json.dll "${S}"/Newtonsoft.Json.dll
 		ln -s tools/FAKE/tools/NuGet.Core.dll "${S}"/NuGet.Core.dll
 		ln -s tools/FAKE/tools/Fake.SQL.dll "${S}"/Fake.SQL.dll
-	
 		sh "${S}/build.sh"
 	fi
 }
