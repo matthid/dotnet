@@ -6,15 +6,12 @@ EAPI=5
 
 USE_DOTNET="net40"
 
-inherit nuget dotnet git-2
+inherit nuget dotnet
 
 DESCRIPTION="FAKE - F# Make"
 HOMEPAGE="http://nuget.org/packages/FAKE"
 
-SRC_URI=""
-
-EGIT_REPO_URI="git://github.com/fsharp/FAKE.git"
-EGIT_TAG="${NPV}"
+SRC_URI="https://github.com/fsharp/FAKE/releases/${NPV}.tar.gz"
 
 LICENSE="MS-PL"
 SLOT="0"
@@ -30,8 +27,7 @@ src_unpack() {
 		echo "using nuget"
 		nuget_src_unpack;
 	else
-		ewarn "!!! Trying git tag, it's not safe !!!"
-		git-2_src_unpack;
+		default;
 	fi
 }
 
