@@ -16,7 +16,10 @@ EGIT_COMMIT="mono-${PV}"
 
 LICENSE="MIT LGPL-2.1 GPL-2 BSD-4 NPL-1.1 Ms-PL GPL-2-with-linking-exception IDPL"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~x86 ~amd64-linux"
+
+KEYWORDS="" 	# ~amd64 ~ppc ~ppc64 ~x86 ~amd64-linux
+		# Failing to build
+
 IUSE="minimal pax_kernel xen doc"
 
 COMMONDEPEND="
