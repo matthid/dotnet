@@ -3,11 +3,12 @@
 # $Header: $
 
 EAPI=5
-USE_DOTNET="net40 net45" 
+USE_DOTNET="net40" 
 
 inherit git-2 dotnet
 
 EGIT_REPO_URI="https://git01.codeplex.com/nuget"
+
 DESCRIPTION="Nuget - .NET Package Manager"
 HOMEPAGE="http://nuget.codeplex.com"
 SRC_URI=""
