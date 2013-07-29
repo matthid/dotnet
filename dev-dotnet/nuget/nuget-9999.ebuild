@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=5
-USE_DOTNET="net40" 
+USE_DOTNET="net45" 
 
 inherit git-2 dotnet
 
@@ -21,8 +21,12 @@ IUSE=""
 DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
 
-src_prepare() {
-	./build.sh
+src_configure() {
+	export EnableNuGetPackageRestore="true"
+}
+
+src_compile() {
+	xbuild Build/Build.proj /p:TargetFrameworkVersion=v"${FRAMEWORK}" /p:Configuration="Mono Release" /t:GoMono || die
 }
 
 src_install() {

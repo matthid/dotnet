@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI=5
-USE_DOTNET="net40" 
+USE_DOTNET="net45" 
 
 inherit dotnet
 
@@ -25,7 +25,7 @@ src_configure() {
 }
 
 src_compile() {
-	xbuild Build/Build.proj /p:Configuration="Mono Release" /t:GoMono || die
+	xbuild Build/Build.proj /p:TargetFrameworkVersion=v"${FRAMEWORK}" /p:Configuration="Mono Release" /t:GoMono || die
 }
 
 src_install() {
