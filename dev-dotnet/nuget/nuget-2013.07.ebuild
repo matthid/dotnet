@@ -19,7 +19,9 @@ IUSE=""
 DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
 
-src_prepare() {
+src_configure() { :; }
+
+src_compile() {
 	./build.sh
 }
 
