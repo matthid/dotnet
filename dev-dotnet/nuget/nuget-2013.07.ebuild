@@ -9,7 +9,8 @@ inherit dotnet
 
 DESCRIPTION="Nuget - .NET Package Manager"
 HOMEPAGE="http://nuget.codeplex.com"
-SRC_URI="http://download-codeplex.sec.s-msft.com/Download/SourceControlFileDownload.ashx?ProjectName=nuget&changeSetId=2764f6c71ea206a60eb136c27c04005975712c19 -> nuget-${PV}.zip"
+SRC_URI="http://download-codeplex.sec.s-msft.com/Download/SourceControlFileDownload.ashx?ProjectName=nuget&changeSetId=2764f6c71ea206a60eb136c27c04005975712c19 -> nuget-archive-${PV}.zip"
+S=${WORKDIR}
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -22,7 +23,7 @@ RDEPEND="${DEPEND}"
 src_configure() { :; }
 
 src_compile() {
-	./build.sh
+	sh ${S}/build.sh
 }
 
 src_install() {
