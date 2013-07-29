@@ -14,16 +14,19 @@ S=${WORKDIR}
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+KEYWORDS="" 	# ~x86 ~amd64
+		# Fails now...
 IUSE=""
 
 DEPEND="dev-lang/mono"
 RDEPEND="${DEPEND}"
 
-src_configure() { :; }
+src_configure() {
+	export EnableNuGetPackageRestore="true"
+}
 
 src_compile() {
-	sh ${S}/build.sh
+	exbuild Build/Build.proj /p:Configuration="Mono Release" /t:GoMono
 }
 
 src_install() {
