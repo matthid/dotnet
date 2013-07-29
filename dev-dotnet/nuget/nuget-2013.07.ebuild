@@ -14,8 +14,7 @@ S=${WORKDIR}
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="" 	# ~x86 ~amd64
-		# Fails now...
+KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND="dev-lang/mono"
@@ -26,7 +25,7 @@ src_configure() {
 }
 
 src_compile() {
-	exbuild Build/Build.proj /p:Configuration="Mono Release" /t:GoMono
+	xbuild Build/Build.proj /p:Configuration="Mono Release" /t:GoMono || die
 }
 
 src_install() {
