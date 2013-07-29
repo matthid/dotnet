@@ -15,12 +15,11 @@ S=${WORKDIR}
 LICENSE="Apache-2.0"
 SLOT="0"
 
-KEYWORDS=""	# ~x86 ~amd64
-		# linked SO question: http://stackoverflow.com/questions/17916582/named-argument-allowprereleaseversions-cannot-be-used-for-a-parameter-which-ha
-
+KEYWORDS="~x86 ~amd64"
 IUSE=""
 
-DEPEND="dev-lang/mono"
+# Mask 3.2.0 because of mcs compiler bug : http://stackoverflow.com/a/17926731/238232
+DEPEND="|| ( >dev-lang/mono-3.2.0 <dev-lang/mono-3.2.0 )"
 RDEPEND="${DEPEND}"
 
 src_configure() {
