@@ -18,7 +18,8 @@ SLOT="0"
 KEYWORDS="" # ~x86 ~amd64
 IUSE=""
 
-DEPEND="dev-lang/mono"
+# Mask 3.2.0 because of mcs compiler bug : http://stackoverflow.com/a/17926731/238232
+DEPEND="|| ( >dev-lang/mono-3.2.0 <dev-lang/mono-3.2.0 )"
 RDEPEND="${DEPEND}"
 
 src_configure() {
