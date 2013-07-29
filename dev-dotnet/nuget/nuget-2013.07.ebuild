@@ -5,17 +5,15 @@
 EAPI=5
 USE_DOTNET="net40" 
 
-inherit git-2 dotnet
-
-EGIT_REPO_URI="https://git01.codeplex.com/nuget"
+inherit dotnet
 
 DESCRIPTION="Nuget - .NET Package Manager"
 HOMEPAGE="http://nuget.codeplex.com"
-SRC_URI=""
+SRC_URI="http://download-codeplex.sec.s-msft.com/Download/SourceControlFileDownload.ashx?ProjectName=nuget&changeSetId=2764f6c71ea206a60eb136c27c04005975712c19 -> nuget-${PV}.zip"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="" # ~x86 ~amd64
+KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 DEPEND="dev-lang/mono"
