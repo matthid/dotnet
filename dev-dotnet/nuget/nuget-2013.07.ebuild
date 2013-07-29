@@ -14,7 +14,10 @@ S=${WORKDIR}
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~x86 ~amd64"
+
+KEYWORDS=""	# ~x86 ~amd64
+		# linked SO question: http://stackoverflow.com/questions/17916582/named-argument-allowprereleaseversions-cannot-be-used-for-a-parameter-which-ha
+
 IUSE=""
 
 DEPEND="dev-lang/mono"
@@ -25,7 +28,7 @@ src_configure() {
 }
 
 src_compile() {
-	xbuild Build/Build.proj /p:TargetFrameworkVersion=v"${FRAMEWORK}" /p:Configuration="Mono Release" /t:GoMono || die
+	xbuild Build/Build.proj /p:Configuration=Release /tv:4.0 /p:TargetFrameworkVersion=v"${FRAMEWORK}" /p:Configuration="Mono Release" /t:GoMono || die
 }
 
 src_install() {
@@ -39,7 +42,6 @@ src_install() {
 pkg_postinst() {
 	mozroots --import --sync --machine
 	
-	# Mono Security bug
 	echo "mono /usr/lib/mono/NuGet/${FRAMEWORK}/NuGet.exe \"\$@\"" > /usr/bin/nuget
 	chmod 777 /usr/bin/nuget
 }
