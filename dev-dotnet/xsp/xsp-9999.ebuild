@@ -22,17 +22,28 @@ IUSE="doc test"
 RDEPEND="dev-db/sqlite:3"
 DEPEND="${RDEPEND}"
 
-AUTOTOOLS_AUTORECONF=yes
-
 src_prepare() {
 	epatch "${FILESDIR}/aclocal-fix.patch"
-	autotools-utils_src_prepare
+	
+	if [ -z "$LIBTOOL" ]; then
+		LIBTOOL=`which glibtool 2>/dev/null`
+		if [ ! -x "$LIBTOOL" ]; then
+			LIBTOOL=`which libtool`
+		fi
+	fi
+	aclocal -I build/m4/shamrock -I build/m4/shave $ACLOCAL_FLAGS
+	if test -z "$NO_LIBTOOLIZE"; then
+		${LIBTOOL}ize --force --copy
+	fi
+	
+	autoconf || die
 }
 
 src_configure() {
 	myeconfargs=("--enable-maintainer-mode")
 	use test && myeconfargs+=("--with_unit_tests")
 	use doc || myeconfargs+=("--disable-docs")
+	automake --gnu --add-missing --force --copy
 	autotools-utils_src_configure
 }
 
@@ -42,7 +53,6 @@ src_compile() {
 
 pkg_preinst() {
 	enewgroup aspnet
-	# Give aspnet home dir of /tmp since it must create ~/.wapi
 	enewuser aspnet -1 -1 /tmp aspnet
 }
 
