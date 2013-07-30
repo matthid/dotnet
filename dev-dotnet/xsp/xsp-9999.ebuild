@@ -7,7 +7,7 @@ EAPI="5"
 USE_DOTNET="net35 net40 net45"
 PATCHDIR="${FILESDIR}/2.2/"
 
-inherit base eutils dotnet user git-2 autotools-utils
+inherit base eutils dotnet user git-2 autotools autotools-utils
 
 DESCRIPTION="XSP is a small web server that can host ASP.NET pages"
 HOMEPAGE="http://www.mono-project.com/ASP.NET"
@@ -24,26 +24,25 @@ DEPEND="${RDEPEND}"
 
 src_prepare() {
 	epatch "${FILESDIR}/aclocal-fix.patch"
-	
+
 	if [ -z "$LIBTOOL" ]; then
 		LIBTOOL=`which glibtool 2>/dev/null`
 		if [ ! -x "$LIBTOOL" ]; then
 			LIBTOOL=`which libtool`
 		fi
 	fi
-	aclocal -I build/m4/shamrock -I build/m4/shave $ACLOCAL_FLAGS
+	eaclocal -I build/m4/shamrock -I build/m4/shave $ACLOCAL_FLAGS
 	if test -z "$NO_LIBTOOLIZE"; then
 		${LIBTOOL}ize --force --copy
 	fi
-	
-	autoconf || die
+	eautoconf
 }
 
 src_configure() {
 	myeconfargs=("--enable-maintainer-mode")
 	use test && myeconfargs+=("--with_unit_tests")
 	use doc || myeconfargs+=("--disable-docs")
-	automake --gnu --add-missing --force --copy
+	eautomake --gnu --add-missing --force --copy #nowarn
 	autotools-utils_src_configure
 }
 
