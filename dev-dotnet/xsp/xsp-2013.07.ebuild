@@ -20,6 +20,8 @@ IUSE="doc test"
 RDEPEND="dev-db/sqlite:3"
 DEPEND="${RDEPEND}"
 
+S=${WORKDIR}/xsp-20130730
+
 src_prepare() {
 	epatch "${FILESDIR}/aclocal-fix.patch"
 
