@@ -41,5 +41,5 @@ src_compile() {
 
 src_install() {
 	default
-	mono_multilib_comply || die
+	dotnet_multilib_comply || die
 }
