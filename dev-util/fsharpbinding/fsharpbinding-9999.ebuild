@@ -81,7 +81,7 @@ src_install() {
 	   # it should be:
 	   #newins "monodevelop/pack/${PACKVERSION}/local/Debug/MonoDevelop.FSharpBinding_${PACKVERSION}.mpack" "Monodevelop.FSharpBinding_${PVR}.mpack"
 	   # but it's:
-	   newins "monodevelop/pack/${PACKVERSION}/local/Debug/MonoDevelop.FSharpBinding_${PACKVERSION}.mpack" "Monodevelop.FSharpBinding_3.2.15.mpack"
+	   newins "monodevelop/pack/${PACKVERSION}/local/Debug/MonoDevelop.FSharpBinding_3.2.15.mpack" "Monodevelop.FSharpBinding_${PVR}.mpack"
 	fi
 	if use emacs; then
 		cd "${S}/emacs"
