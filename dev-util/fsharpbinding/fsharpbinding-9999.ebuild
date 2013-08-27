@@ -4,8 +4,6 @@
 
 EAPI=5
 
-USE_DOTNET="net40"
-
 inherit git-2 elisp-common autotools dotnet eutils
 
 EGIT_REPO_URI="git://github.com/fsharp/fsharpbinding.git"
@@ -26,7 +24,7 @@ DEPEND="dev-lang/fsharp
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
-	mono_pkg_setup
+	dotnet_pkg_setup
 	if use emacs; then
 		elisp-need-emacs "${NEED_EMACS:-21}"
 		case $? in
