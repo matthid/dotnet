@@ -78,8 +78,10 @@ src_install() {
 	   insinto /usr/lib/monodevelop/Packs
 	   PACKVERSION=`cat monodevelop/Makefile.orig | head -n 7 | tail -n 1 | grep -o "[0-9]\+.[0-9]\+.[0-9]\+\(.[0-9]\+\)\?"`
 	   elog "Using Packversion: ${PACKVERSION}"
-	   newins "monodevelop/pack/${PACKVERSION}/local/Debug/MonoDevelop.FSharpBinding_${PACKVERSION}.mpack" "Monodevelop.FSharpBinding_${PVR}.mpack"
-
+	   # it should be:
+	   #newins "monodevelop/pack/${PACKVERSION}/local/Debug/MonoDevelop.FSharpBinding_${PACKVERSION}.mpack" "Monodevelop.FSharpBinding_${PVR}.mpack"
+	   # but it's:
+	   newins "monodevelop/pack/${PACKVERSION}/local/Debug/MonoDevelop.FSharpBinding_${PACKVERSION}.mpack" "Monodevelop.FSharpBinding_3.2.15.mpack"
 	fi
 	if use emacs; then
 		cd "${S}/emacs"
