@@ -1,6 +1,14 @@
 gentoo-dotnet unofficial overlay
 ================================
 
+Overlay Installation
+--------------------
+
+ - emerge -av layman
+ - layman -a dotnet
+
+<hr/>
+
  - Join #gentoo-dotnet channel on Freenode
  - Open issues here https://github.com/gentoo-dotnet/gentoo-dotnet
  - Add dotnet@gentoo.org to Watching on https://bugs.gentoo.org/userprefs.cgi?tab=email
