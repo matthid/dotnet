@@ -20,14 +20,9 @@ RDEPEND=">=dev-lang/mono-2.4.2
 	dev-dotnet/gtk-sharp"
 DEPEND="${RDEPEND}
 	sys-apps/sed
-	dev-util/pkgconfig"
+	virtual/pkgconfig"
 
 src_configure() {
-	sed -i 's/dnl/#/' */Makefile.in # to make it work with make 3.82
-	econf $(use_enable debug) $(use_enable !debug release)
-}
-
-src_install() {
-	emake DESTDIR="${D}" install
-	dodoc NEWS README
+	sed -i 's/dnl/#/' || die "sed failed" */Makefile.in # to make it work with make 3.82
+	econf $(usex debug "debug" "release")
 }
