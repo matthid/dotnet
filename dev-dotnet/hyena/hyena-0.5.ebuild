@@ -23,6 +23,6 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 src_configure() {
-	sed -i 's/dnl/#/' || die "sed failed" */Makefile.in # to make it work with make 3.82
-	econf $(usex debug "debug" "release")
+	sed -i 's/dnl/#/' */Makefile.in || die "sed failed" # to make it work with make 3.82
+	econf --enable-$(usex debug debug release)
 }
