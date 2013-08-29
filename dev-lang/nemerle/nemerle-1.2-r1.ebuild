@@ -15,7 +15,7 @@ SRC_URI="https://github.com/rsdn/nemerle/archive/v${PV}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="+binary"
 
 MAKEOPTS="${MAKEOPTS} -j1" #nowarn
