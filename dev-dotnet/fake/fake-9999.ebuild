@@ -2,13 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI="5"
 USE_DOTNET="net40"
 
 inherit git-2 dotnet
 
 EGIT_REPO_URI="git://github.com/Heather/FAKE.git"
-
 EGIT_MASTER="develop"
 
 DESCRIPTION="FAKE - F# Make"
@@ -25,7 +24,10 @@ dev-lang/fsharp"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	./build.sh
+	ln -s tools/FAKE/tools/Newtonsoft.Json.dll "${S}"/Newtonsoft.Json.dll
+	ln -s tools/FAKE/tools/NuGet.Core.dll "${S}"/NuGet.Core.dll
+	ln -s tools/FAKE/tools/Fake.SQL.dll "${S}"/Fake.SQL.dll
+	./build.sh || die "build.sh failed"
 }
 
 src_install() {
