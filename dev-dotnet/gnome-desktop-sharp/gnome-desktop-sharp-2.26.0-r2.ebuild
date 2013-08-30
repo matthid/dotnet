@@ -41,19 +41,16 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	base_src_prepare
-
-	eautoreconf || die
-	elibtoolize || die
+	eautoreconf
+	elibtoolize
 }
 
 src_configure() {
-	econf \
-		$(use_enable debug) \
-		|| die
+	econf $(use_enable debug)
 }
 
 src_compile() {
-	emake || die
+	emake
 }
 
 src_install() {
