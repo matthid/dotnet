@@ -9,22 +9,17 @@
 
 inherit dotnet
 
-if [[ $PN == *_* ]]
-then
-   	NPN=${PN/_/.}
-else
-	NPN=${PN}
-fi
+NPN=${PN/_/.}
 if [[ $PV == *_alpha* ]]
 then
-   	NPV=${PVR/_/-}
+	NPV=${PVR/_/-}
 else
-   	NPV=${PVR}
+	NPV=${PVR}
 fi
 
 # @FUNCTION: nuget_src_unpack
 # @DESCRIPTION: Runs nuget.
-nuget_src_unpack() { 
+nuget_src_unpack() {
 	nuget install "${NPN}" -Version "${NPV}" -OutputDirectory "${P}"
 }
 
