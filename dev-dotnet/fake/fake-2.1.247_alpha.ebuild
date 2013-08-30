@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI="5"
 
 USE_DOTNET="net40"
 
@@ -40,7 +40,7 @@ src_prepare() {
 		ln -s tools/FAKE/tools/Newtonsoft.Json.dll "${S}"/Newtonsoft.Json.dll
 		ln -s tools/FAKE/tools/NuGet.Core.dll "${S}"/NuGet.Core.dll
 		ln -s tools/FAKE/tools/Fake.SQL.dll "${S}"/Fake.SQL.dll
-		sh "${S}/build.sh"
+		sh "${S}/build.sh" || die "build.sh failed"
 	fi
 }
 
@@ -63,7 +63,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	#Exec :
 	echo "mono /usr/lib/mono/FAKE/${FRAMEWORK}/FAKE.exe \"\$@\"" > /usr/bin/fake
 	chmod 777 /usr/bin/fake
 }
