@@ -5,6 +5,7 @@
 EAPI="5"
 
 USE_DOTNET="net40"
+NUGET_DEPEND=false
 
 inherit nuget dotnet
 
@@ -19,7 +20,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE="-nuget"
 
 DEPEND="dev-lang/mono
-dev-lang/fsharp"
+	dev-lang/fsharp
+	nuget? ( dev-dotnet/nuget )"
+
 RDEPEND="${DEPEND}"
 
 src_unpack() {
