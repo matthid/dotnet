@@ -9,6 +9,8 @@
 
 inherit dotnet
 
+DEPEND="dev-dotnet/nuget"
+
 NPN=${PN/_/.}
 if [[ $PV == *_alpha* ]]
 then
