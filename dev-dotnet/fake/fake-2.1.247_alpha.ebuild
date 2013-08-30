@@ -5,7 +5,7 @@
 EAPI="5"
 
 USE_DOTNET="net40"
-NUGET_DEPEND=false
+NUGET_DEPEND=
 
 inherit nuget dotnet
 

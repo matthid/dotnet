@@ -11,11 +11,9 @@ inherit dotnet
 
 # @ECLASS_VARIABLE: NUGET_DEPEND
 # @DESCRIPTION Set false to net depend on nuget
-: ${NUGET_DEPEND:=true}
+: ${NUGET_DEPEND:="1"}
 
-if $NUGET_DEPEND; then
-	DEPEND="${DEPEND} dev-dotnet/nuget"
-fi
+use [[ -n $NUGET_DEPEND ]] && DEPEND+=" dev-dotnet/nuget"
 
 NPN=${PN/_/.}
 if [[ $PV == *_alpha* ]]
