@@ -2,9 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-#TODO: BUILD FROM TAG OR USE NUGET
-
-EAPI=5
+EAPI="5"
 
 USE_DOTNET="net40"
 
