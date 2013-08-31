@@ -13,7 +13,7 @@ inherit dotnet eutils
 # @DESCRIPTION Set false to net depend on fake
 : ${FAKE_DEPEND:="1"}
 
-use [[ -n $FAKE_DEPEND ]] && DEPEND+=" dev-lang/fsharp dev-dotnet/fake"
+[[ -n $FAKE_DEPEND ]] && DEPEND+=" dev-lang/fsharp dev-dotnet/fake"
 
 # @FUNCTION: fake_src_configure
 # @DESCRIPTION: Runs nothing

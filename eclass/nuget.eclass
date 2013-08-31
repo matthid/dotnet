@@ -13,7 +13,7 @@ inherit dotnet
 # @DESCRIPTION Set false to net depend on nuget
 : ${NUGET_DEPEND:="1"}
 
-use [[ -n $NUGET_DEPEND ]] && DEPEND+=" dev-dotnet/nuget"
+[[ -n $NUGET_DEPEND ]] && DEPEND+=" dev-dotnet/nuget"
 
 NPN=${PN/_/.}
 if [[ $PV == *_alpha* ]]
