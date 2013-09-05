@@ -39,10 +39,6 @@ src_configure() {
 	econf $(use_enable debug)
 }
 
-src_compile() {
-	emake
-}
-
 src_install() {
 	default
 	dotnet_multilib_comply
