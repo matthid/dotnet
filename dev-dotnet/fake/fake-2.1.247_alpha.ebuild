@@ -40,9 +40,9 @@ src_compile() {
 		echo "installation is done via nuget"
 	else
 		#fake is searching for libraries in source folder
-		ln -s tools/FAKE/tools/Newtonsoft.Json.dll "${S}"/Newtonsoft.Json.dll
-		ln -s tools/FAKE/tools/NuGet.Core.dll "${S}"/NuGet.Core.dll
-		ln -s tools/FAKE/tools/Fake.SQL.dll "${S}"/Fake.SQL.dll
+		ln -s tools/FAKE/tools/Newtonsoft.Json.dll "${S}"/Newtonsoft.Json.dll || die
+		ln -s tools/FAKE/tools/NuGet.Core.dll "${S}"/NuGet.Core.dll || die
+		ln -s tools/FAKE/tools/Fake.SQL.dll "${S}"/Fake.SQL.dll || die
 		sh "${S}/build.sh" || die "build.sh failed"
 	fi
 }

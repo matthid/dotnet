@@ -24,9 +24,9 @@ dev-lang/fsharp"
 RDEPEND="${DEPEND}"
 
 src_compile() {
-	ln -s tools/FAKE/tools/Newtonsoft.Json.dll "${S}"/Newtonsoft.Json.dll
-	ln -s tools/FAKE/tools/NuGet.Core.dll "${S}"/NuGet.Core.dll
-	ln -s tools/FAKE/tools/Fake.SQL.dll "${S}"/Fake.SQL.dll
+	ln -s tools/FAKE/tools/Newtonsoft.Json.dll "${S}"/Newtonsoft.Json.dll || die
+	ln -s tools/FAKE/tools/NuGet.Core.dll "${S}"/NuGet.Core.dll || die
+	ln -s tools/FAKE/tools/Fake.SQL.dll "${S}"/Fake.SQL.dll || die
 	./build.sh || die "build.sh failed"
 }
 
