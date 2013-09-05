@@ -35,7 +35,7 @@ src_unpack() {
 	fi
 }
 
-src_prepare() {
+src_compile() {
 	if use nuget ; then
 		echo "installation is done via nuget"
 	else

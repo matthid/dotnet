@@ -5,7 +5,7 @@
 EAPI="5"
 USE_DOTNET="net40"
 
-inherit git-2 dotnet
+inherit git-2 eutils dotnet
 
 EGIT_REPO_URI="git://github.com/Heather/FAKE.git"
 EGIT_MASTER="develop"
@@ -23,7 +23,7 @@ DEPEND="dev-lang/mono
 dev-lang/fsharp"
 RDEPEND="${DEPEND}"
 
-src_prepare() {
+src_compile() {
 	ln -s tools/FAKE/tools/Newtonsoft.Json.dll "${S}"/Newtonsoft.Json.dll
 	ln -s tools/FAKE/tools/NuGet.Core.dll "${S}"/NuGet.Core.dll
 	ln -s tools/FAKE/tools/Fake.SQL.dll "${S}"/Fake.SQL.dll
@@ -35,9 +35,7 @@ src_install() {
 	insinto /usr/lib/mono/FAKE/"${FRAMEWORK}"/
 	doins build/FAKE.exe
 	doins build/FakeLib.dll
+	make_wrapper fake "mono /usr/lib/mono/FAKE/${FRAMEWORK}/FAKE.exe \"\$@\""
 }
 
-pkg_postinst() {
-	echo "mono /usr/lib/mono/FAKE/${FRAMEWORK}/FAKE.exe \"\$@\"" > /usr/bin/fake
-	chmod 777 /usr/bin/fake
-}
+
