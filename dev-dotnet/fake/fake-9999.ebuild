@@ -37,5 +37,3 @@ src_install() {
 	doins build/FakeLib.dll
 	make_wrapper fake "mono /usr/lib/mono/FAKE/${FRAMEWORK}/FAKE.exe \"\$@\""
 }
-
-
