@@ -28,7 +28,7 @@ RDEPEND="${DEPEND}"
 src_unpack() {
 	if use nuget ; then
 		echo "using nuget"
-		nuget_src_unpack;
+		nuget_src_unpack
 	else
 		default;
 		S=${WORKDIR}/FAKE-${NPV}
