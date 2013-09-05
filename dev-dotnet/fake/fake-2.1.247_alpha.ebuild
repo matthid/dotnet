@@ -5,9 +5,9 @@
 EAPI="5"
 
 USE_DOTNET="net40"
-NUGET_DEPEND=
+NUGET_NO_DEPEND="1"
 
-inherit nuget dotnet
+inherit nuget dotnet eutils
 
 DESCRIPTION="FAKE - F# Make"
 HOMEPAGE="http://nuget.org/packages/FAKE"
@@ -51,21 +51,17 @@ src_install() {
 	elog "Installing libraries"
 	insinto /usr/lib/mono/FAKE/"${FRAMEWORK}"/
 	if use nuget ; then
-		doins FAKE."${NPV}"/tools/FAKE.exe || die
-		doins FAKE."${NPV}"/tools/FakeLib.dll || die
-		doins FAKE."${NPV}"/tools/Newtonsoft.Json.dll
-		doins FAKE."${NPV}"/tools/Fake.SQL.dll
-		doins FAKE."${NPV}"/tools/NuGet.Core.dll
+		doins FAKE."${NPV}"/tools/FAKE.exe
+		doins FAKE."${NPV}"/tools/FakeLib.dll
+		nonfatal doins FAKE."${NPV}"/tools/Newtonsoft.Json.dll
+		nonfatal doins FAKE."${NPV}"/tools/Fake.SQL.dll
+		nonfatal doins FAKE."${NPV}"/tools/NuGet.Core.dll
 	else
-		doins build/FAKE.exe || die
-		doins build/FakeLib.dll || die
-		doins tools/FAKE/tools/Newtonsoft.Json.dll
-		doins tools/FAKE/tools/Fake.SQL.dll
-		doins tools/FAKE/tools/NuGet.Core.dll
+		doins build/FAKE.exe
+		doins build/FakeLib.dll
+		nonfatal doins tools/FAKE/tools/Newtonsoft.Json.dll
+		nonfatal doins tools/FAKE/tools/Fake.SQL.dll
+		nonfatal doins tools/FAKE/tools/NuGet.Core.dll
 	fi
-}
-
-pkg_postinst() {
-	echo "mono /usr/lib/mono/FAKE/${FRAMEWORK}/FAKE.exe \"\$@\"" > /usr/bin/fake
-	chmod 777 /usr/bin/fake
+	make_wrapper fake "mono /usr/lib/mono/FAKE/${FRAMEWORK}/FAKE.exe \"\$@\""
 }

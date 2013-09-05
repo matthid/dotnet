@@ -33,8 +33,8 @@ src_prepare() {
 src_install() {
 	elog "Installing libraries"
 	insinto /usr/lib/mono/FAKE/"${FRAMEWORK}"/
-	doins build/FAKE.exe || die
-	doins build/FakeLib.dll || die
+	doins build/FAKE.exe
+	doins build/FakeLib.dll
 }
 
 pkg_postinst() {
