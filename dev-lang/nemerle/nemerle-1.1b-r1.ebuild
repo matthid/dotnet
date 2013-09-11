@@ -6,7 +6,7 @@ EAPI="5"
 
 USE_DOTNET="net35 net40 net45"
 
-inherit dotnet multilib
+inherit dotnet multilib eutils
 
 DESCRIPTION="A hybrid programming language for .NET / Mono platforms"
 HOMEPAGE="http://www.nemerle.org/"
@@ -88,9 +88,5 @@ src_install()
 		into /usr
 		doins ${Bootstrap}/ncc.exe
 	fi
-}
-
-pkg_postinst() {
-	echo "mono /usr/$(get_libdir)/mono/${PN}/${FRAMEWORK}/ncc.exe \"\$@\"" > /usr/bin/ncc
-	chmod 777 /usr/bin/ncc
+	make_wrapper ncc "mono /usr/$(get_libdir)/mono/${PN}/${FRAMEWORK}/ncc.exe \"\$@\""
 }

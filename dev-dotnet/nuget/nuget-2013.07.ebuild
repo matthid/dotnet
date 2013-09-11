@@ -2,10 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI="5"
 USE_DOTNET="net45"
 
-inherit dotnet
+inherit dotnet eutils
 
 DESCRIPTION="Nuget - .NET Package Manager"
 HOMEPAGE="http://nuget.codeplex.com"
@@ -35,13 +35,11 @@ src_install() {
 	elog "Installing libraries"
 
 	insinto /usr/lib/mono/NuGet/"${FRAMEWORK}"/
-	doins src/CommandLine/obj/Mono\ Release/NuGet.exe || die
-	doins src/Core/obj/Mono\ Release/NuGet.Core.dll || die
+	doins src/CommandLine/obj/Mono\ Release/NuGet.exe
+	doins src/Core/obj/Mono\ Release/NuGet.Core.dll
+	make_wrapper nuget "mono /usr/lib/mono/NuGet/${FRAMEWORK}/NuGet.exe \"\$@\""
 }
 
 pkg_postinst() {
 	mozroots --import --sync --machine
-
-	echo "mono /usr/lib/mono/NuGet/${FRAMEWORK}/NuGet.exe \"\$@\"" > /usr/bin/nuget
-	chmod 777 /usr/bin/nuget
 }

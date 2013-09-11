@@ -5,7 +5,7 @@
 EAPI=5
 USE_DOTNET="net45"
 
-inherit git-2 dotnet
+inherit git-2 dotnet eutils
 
 EGIT_REPO_URI="https://git01.codeplex.com/nuget"
 
@@ -35,14 +35,11 @@ src_install() {
 	elog "Installing libraries"
 
 	insinto /usr/lib/mono/NuGet/"${FRAMEWORK}"/
-	doins src/CommandLine/obj/Mono\ Release/NuGet.exe || die
-	doins src/Core/obj/Mono\ Release/NuGet.Core.dll || die
+	doins src/CommandLine/obj/Mono\ Release/NuGet.exe
+	doins src/Core/obj/Mono\ Release/NuGet.Core.dll
+	make_wrapper nuget "mono /usr/lib/mono/NuGet/${FRAMEWORK}/NuGet.exe \"\$@\""
 }
 
 pkg_postinst() {
 	mozroots --import --sync --machine
-
-	# Mono Security bug
-	echo "mono /usr/lib/mono/NuGet/${FRAMEWORK}/NuGet.exe \"\$@\"" > /usr/bin/nuget
-	chmod 777 /usr/bin/nuget
 }
