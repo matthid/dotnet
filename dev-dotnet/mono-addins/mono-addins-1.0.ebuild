@@ -8,7 +8,7 @@ inherit dotnet multilib
 
 DESCRIPTION="A generic framework for creating extensible applications"
 HOMEPAGE="http://www.mono-project.com/Mono.Addins"
-SRC_URI="http://download-codeplex.sec.s-msft.com/Download/Release?ProjectName=monoaddins&DownloadId=509482&FileTime=129948574181430000&Build=20717 -> ${P}.tar.gz"
+SRC_URI="https://github.com/mono/mono-addins/archive/mono-addins-1.0.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
