@@ -4,7 +4,7 @@
 
 EAPI="5"
 
-inherit dotnet multilib
+inherit dotnet multilib autotools-utils
 
 DESCRIPTION="A generic framework for creating extensible applications"
 HOMEPAGE="http://www.mono-project.com/Mono.Addins"
@@ -21,13 +21,20 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 MAKEOPTS="${MAKEOPTS} -j1" #nowarn
 
+S=${WORKDIR}/${PN}-${P}
+
 src_prepare() {
-	default
+	eautoreconf
+	autotools-utils_src_prepare
 	sed -i "s;Mono.Cairo;Mono.Cairo, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756;g" Mono.Addins.Gui/Mono.Addins.Gui.csproj || die "sed failed"
 }
 
 src_configure() {
 	econf $(use_enable gtk gui)
+}
+
+src_compile() {
+	default
 }
 
 src_install() {
