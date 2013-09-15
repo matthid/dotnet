@@ -55,8 +55,9 @@ src_prepare() {
 
 src_configure() {
 	if use monodevelop; then
-	   cd "${S}/monodevelop"
-	   ./configure.sh || die "configure failed"
+		cd "${S}/monodevelop"
+		addpredict "/etc/mono/registry"
+		./configure.sh || die "configure failed"
 	fi
 }
 src_compile() {
