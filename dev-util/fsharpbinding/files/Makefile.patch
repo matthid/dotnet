@@ -1,11 +1,11 @@
---- Makefile.orig.old	2013-09-11 09:02:25.745204623 +0400
-+++ Makefile.orig	2013-09-11 09:04:15.198529296 +0400
+--- Makefile.orig.old	2013-09-15 10:49:36.149935302 +0400
++++ Makefile.orig	2013-09-15 11:03:30.709913899 +0400
 @@ -1,7 +1,7 @@
  # Makefile for compiling and installing F# AutoComplete engine
  
  # Here are a few paths that need to be configured first:
 -MONOBIN = INSERT_MONO_BIN
 +MONOBIN = /usr/lib/mono/4.0
- FSBIN = lib/fsharp
- FSC = lib/fsharp/fsharpc
+ FSC = mono $(MONOBIN)/fsc.exe
  
+ FILES_FCB = \
