@@ -56,7 +56,7 @@ src_prepare() {
 src_configure() {
 	if use monodevelop; then
 	   cd "${S}/monodevelop"
-	   ./configure.sh
+	   ./configure.sh || die "configure failed"
 	fi
 }
 src_compile() {
@@ -89,7 +89,7 @@ src_install() {
 		if [[ -n ${ELISP_TEXINFO} ]]; then
 			set -- ${ELISP_TEXINFO}
 			set -- ${@##*/}
-			doinfo ${@/%.*/.info*} || die
+			doinfo ${@/%.*/.info*}
 		fi
 		#AutoComplete:
 		xbuild "${S}/FSharp.AutoComplete/FSharp.AutoComplete.fsproj" /property:OutputPath="${D}/usr/share/emacs/site-lisp/${PN}/bin/"

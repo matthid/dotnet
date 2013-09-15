@@ -63,7 +63,7 @@ src_install () {
 	done
 	if [[ "${DOCS[@]}" ]]
 	then
-		dodoc "${DOCS[@]}" || die "dodoc DOCS failed"
+		dodoc "${DOCS[@]}"
 	fi
 	prune_libtool_files
 }

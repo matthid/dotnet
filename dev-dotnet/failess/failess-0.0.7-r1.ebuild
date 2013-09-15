@@ -24,11 +24,11 @@ RDEPEND="${DEPEND}"
 src_install() {
 	elog "Installing libraries"
 	insinto /usr/lib/mono/Failess/"${FRAMEWORK}"/
-	doins Failess."${NPV}"/tools/Failess.exe || die
+	doins Failess."${NPV}"/tools/Failess.exe
 	doins Failess."${NPV}"/tools/Failess.exe.config
-	doins Failess."${NPV}"/tools/FakeLib.dll || die
-	doins Failess."${NPV}"/tools/FailessLib.dll || die
-	doins Failess."${NPV}"/tools/FailLib.dll || die
+	doins Failess."${NPV}"/tools/FakeLib.dll
+	doins Failess."${NPV}"/tools/FailessLib.dll
+	doins Failess."${NPV}"/tools/FailLib.dll
 	doins Failess."${NPV}"/tools/Newtonsoft.Json.dll
 	doins Failess."${NPV}"/tools/NuGet.Core.dll
 	doins Failess."${NPV}"/tools/Mono.Cecil.dll
