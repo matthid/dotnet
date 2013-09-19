@@ -49,3 +49,9 @@ src_configure() {
 		$(use_with libnotify notify) \
 		$(use_with spell gtkspell)
 }
+
+pkg_postinst() {
+	#runner scripts fix
+	sed -i -e 's@mono --debug@mono --runtime=v4.0@g' /usr/bin/smuxi-frontend-gnome || die
+	sed -i -e 's@mono --debug@mono --runtime=v4.0@g' /usr/bin/smuxi-server || die
+}
