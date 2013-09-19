@@ -19,12 +19,17 @@ KEYWORDS="x86 amd64"
 IUSE=""
 
 # Mask 3.2.0 because of mcs compiler bug : http://stackoverflow.com/a/17926731/238232
-# it fixed in 9999 MAYBE but not on future stable releases yet.
-DEPEND="|| ( >=dev-lang/mono-9999 <dev-lang/mono-3.2.0 )"
+# it fixed in 3.2.3
+DEPEND="|| ( >=dev-lang/mono-3.2.3 <dev-lang/mono-3.2.0 )"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
+	dotnet_pkg_setup
 	mozroots --import --sync --machine
+}
+
+src_prepare() {
+	sed -i -e 's@RunTests@ @g' "${S}/Build/Build.proj" || die
 }
 
 src_configure() {
@@ -32,7 +37,7 @@ src_configure() {
 }
 
 src_compile() {
-	xbuild Build/Build.proj /p:Configuration=Release /tv:4.0 /p:TargetFrameworkVersion=v"${FRAMEWORK}" /p:Configuration="Mono Release" /t:GoMono || die
+	xbuild Build/Build.proj /p:Configuration=Release /p:TreatWarningsAsErrors=false /tv:4.0 /p:TargetFrameworkVersion=v"${FRAMEWORK}" /p:Configuration="Mono Release" /t:GoMono || die
 }
 
 src_install() {
