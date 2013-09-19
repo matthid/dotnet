@@ -23,6 +23,10 @@ IUSE=""
 DEPEND="|| ( >=dev-lang/mono-9999 <dev-lang/mono-3.2.0 )"
 RDEPEND="${DEPEND}"
 
+pkg_setup() {
+	mozroots --import --sync --machine
+}
+
 src_configure() {
 	export EnableNuGetPackageRestore="true"
 }
@@ -38,8 +42,4 @@ src_install() {
 	doins src/CommandLine/obj/Mono\ Release/NuGet.exe
 	doins src/Core/obj/Mono\ Release/NuGet.Core.dll
 	make_wrapper nuget "mono /usr/lib/mono/NuGet/${FRAMEWORK}/NuGet.exe \"\$@\""
-}
-
-pkg_postinst() {
-	mozroots --import --sync --machine
 }
