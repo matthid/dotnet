@@ -3,7 +3,7 @@
 # $Header: $
 
 EAPI="5"
-inherit eutils mono-env git-2
+inherit eutils mono-env git-2 autotools-utils
 
 DESCRIPTION="A flexible, irssi-like and user-friendly IRC client for the Gnome Desktop"
 HOMEPAGE="http://www.smuxi.org/main/"
@@ -40,25 +40,31 @@ fi
 
 DOCS=( FEATURES TODO README )
 
-src_configure() {
-	# Our dev-dotnet/db4o is completely unmaintained
-	# We don't have ubuntu stuff
-	econf \
-		--enable-engine-irc		\
-		--without-indicate		\
-		--with-vendor-package-version="Gentoo ${PV}" \
-		--with-db4o=included \
-		--with-messaging-menu=no \
-		--with-indicate=no \
-		--disable-engine-jabbr \
-		$(use_enable debug)		\
-		$(use_enable gtk frontend-gnome) \
-		$(use_with libnotify notify) \
-		$(use_with spell gtkspell)
+src_prepare() {
+	autotools-utils_autoreconf
+	autotools-utils_src_prepare
 }
 
-pkg_postinst() {
+src_configure() {
+        local myeconfargs=(
+		--enable-engine-irc
+		--without-indicate
+		--with-vendor-package-version="Gentoo ${PV}"
+		--with-db4o=included
+		--with-messaging-menu=no
+		--with-indicate=no
+		--disable-engine-jabbr
+		$(use_enable debug)
+		$(use_enable gtk frontend-gnome)
+		$(use_with libnotify notify)
+		$(use_with spell gtkspell)
+	)
+	autotools-utils_src_configure
+}
+
+src_install() {
+	default
 	#runner scripts fix
-	sed -i -e 's@mono --debug@mono --runtime=v4.0@g' /usr/bin/smuxi-frontend-gnome || die
-	sed -i -e 's@mono --debug@mono --runtime=v4.0@g' /usr/bin/smuxi-server || die
+	sed -i -e 's@mono --debug@mono --runtime=v4.0@g' "${ED}"/usr/bin/smuxi-frontend-gnome || die
+	sed -i -e 's@mono --debug@mono --runtime=v4.0@g' "${ED}"/usr/bin/smuxi-server || die
 }
