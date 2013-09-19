@@ -4,7 +4,7 @@
 
 EAPI="5"
 
-inherit eutils mono versionator
+inherit eutils dotnet versionator
 
 PV_MAJOR=$(get_version_component_range 1-2)
 
