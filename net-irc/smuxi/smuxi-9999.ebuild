@@ -31,10 +31,10 @@ DEPEND="${RDEPEND}
 "
 
 if use heather; then
-	EGIT_REPO_URI="git@github.com:Heather/smuxi.git"
+	EGIT_REPO_URI="git://github.com/Heather/smuxi.git"
 	EGIT_MASTER="heather"
 else
-	EGIT_REPO_URI="git@github.com:meebey/smuxi.git"
+	EGIT_REPO_URI="git://github.com/meebey/smuxi.git"
 	EGIT_MASTER="master"
 fi
 
