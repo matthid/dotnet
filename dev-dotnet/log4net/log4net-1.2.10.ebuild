@@ -47,5 +47,5 @@ src_install() {
 	dosym ${PN}-${PV}.pc /usr/$(get_libdir)/pkgconfig/${PN}-${PV_MAJOR}.pc
 	dosym ${PN}-${PV}.pc /usr/$(get_libdir)/pkgconfig/${PN}.pc
 
-	dodoc README.txt STATUS.txt
+	dodoc README.txt
 }
