@@ -19,7 +19,7 @@ KEYWORDS="x86 amd64"
 IUSE=""
 
 # Mask 3.2.0 because of mcs compiler bug : http://stackoverflow.com/a/17926731/238232
-# it fixes in 9999 but not on future stable releases yet.
+# it fixed in 9999 MAYBE but not on future stable releases yet.
 DEPEND="|| ( >=dev-lang/mono-9999 <dev-lang/mono-3.2.0 )"
 RDEPEND="${DEPEND}"
 
