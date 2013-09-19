@@ -10,7 +10,7 @@ HOMEPAGE="http://www.smuxi.org/main/"
 
 SLOT="0"
 KEYWORDS=""
-IUSE="dbus debug gtk libnotify spell"
+IUSE="dbus debug gtk libnotify spell +heather"
 LICENSE="|| ( GPL-2 GPL-3 )"
 
 RDEPEND="
@@ -29,8 +29,6 @@ DEPEND="${RDEPEND}
 	>=sys-devel/gettext-0.17
 	virtual/pkgconfig
 "
-
-IUSE="+heather"
 
 if use heather; then
 	EGIT_REPO_URI="git@github.com:Heather/smuxi.git"
